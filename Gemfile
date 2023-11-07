@@ -55,6 +55,7 @@ group :development, :test do
   gem 'faker'
 
   gem 'devise'
+  gem 'responders'
 end
 
 group :development do
