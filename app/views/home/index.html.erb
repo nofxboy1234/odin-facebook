@@ -2,18 +2,43 @@
 <p>Find me in app/views/home/index.html.erb</p>
 
 
-<%= button_to 'Cancel my account', user_registration_path, data: { confirm: 'Are you sure?', turbo_confirm: 'Are you sure?' }, method: :delete %>
-<%= link_to 'Cancel my account', user_registration_path, data: { confirm: 'Are you sure?', turbo_confirm: 'Are you sure?', turbo_method: :delete }, method: :delete %>
+<%= button_to 'Cancel my account', user_registration_path, 
+                    data: { 
+                      confirm: 'Are you sure?', 
+                      turbo_confirm: 'Are you sure?' 
+                    }, 
+                    method: :delete %>
+<%= link_to 'Cancel my account', 
+                    user_registration_path, 
+                    data: { 
+                      confirm: 'Are you sure?', 
+                      turbo_confirm: 'Are you sure?', 
+                      turbo_method: :delete 
+                    }, 
+                    method: :delete %>
 
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+<%= button_to 'Sign out', 
+                    destroy_user_session_path, 
+                    method: :delete %>
+<%= link_to 'Sign out', 
+                    destroy_user_session_path, 
+                    method: :delete, 
+                    data: { 
+                      turbo_method: :delete 
+                    } %>
 
 
-<%= button_to 'Sign in', new_user_session_path, data: { confirm: 'Are you sure?', turbo_confirm: 'Are you sure?' } %>
-<%= link_to 'Sign in', new_user_session_path, data: { confirm: 'Are you sure?', turbo_confirm: 'Are you sure?', turbo_method: :get }, method: :get %>
-
-
-<% if false %>
-  <%= link_to "Edit this cat", edit_cat_path(@cat), data: { turbo_method: :get, turbo_confirm: 'Edit this cat?'} %>
-  <%= link_to "Back to cats", cats_path, data: { turbo_method: :get, turbo_confirm: 'Back to cats index?' } %>
-<% end %>
+<%= button_to 'Sign in', 
+                    new_user_session_path, 
+                    data: { 
+                      confirm: 'Are you sure?', 
+                      turbo_confirm: 'Are you sure?' 
+                    } %>
+<%= link_to 'Sign in', 
+                    new_user_session_path, 
+                    data: { 
+                      confirm: 'Are you sure?', 
+                      turbo_confirm: 'Are you sure?', 
+                      turbo_method: :get 
+                    }, 
+                    method: :get %>
