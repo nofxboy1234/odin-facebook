@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_13_203055) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_13_204123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_203055) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "post_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -66,6 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_203055) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "posts"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "profiles", "users"
 end
