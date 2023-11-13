@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_10_084605) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_13_080856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,9 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_084605) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "people", "planets", column: "home_planet_id"
   add_foreign_key "people", "species"
   add_foreign_key "person_films", "films"
   add_foreign_key "person_films", "people"
-  add_foreign_key "planets", "people", column: "senator_id"
 end
