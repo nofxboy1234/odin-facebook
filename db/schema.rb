@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_13_214722) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_13_215837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_214722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "sender_id"
+    t.bigint "notification_id"
+    t.index ["notification_id"], name: "index_friend_requests_on_notification_id"
     t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
   end
 
@@ -74,6 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_214722) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "friend_requests", "notifications"
   add_foreign_key "friend_requests", "users", column: "sender_id"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "profiles", "users"
