@@ -6,5 +6,5 @@ class Person < ApplicationRecord
   has_many :films, through: :person_films
   
   has_one :senator, through: :home_planet
-  has_many :citizens, through: :home_planet
+  has_many :neighbours, through: :home_planet, source: :citizens
 end
