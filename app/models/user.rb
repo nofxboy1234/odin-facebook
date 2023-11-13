@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :friends,
            class_name: 'User',
            foreign_key: :befriender_id
-  belongs_to :befriender, class_name: 'User'
+  belongs_to :befriender, class_name: 'User', optional: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
