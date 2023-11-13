@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :profile do
-    name { "MyString" }
-    birthday { "2023-11-13" }
+    name { Faker::Name.name }
+    birthday { Faker::Date.birthday }
   end
 end
