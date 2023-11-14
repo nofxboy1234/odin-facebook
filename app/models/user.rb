@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :posts, foreign_key: :author_id
   has_one :profile
-
+  has_many :notifications
   has_many :comments
 
   has_many :likes
