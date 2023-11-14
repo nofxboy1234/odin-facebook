@@ -11,6 +11,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: "Github") if is_navigational_format?
     else
       session["devise.github_data"] = request.env["omniauth.auth"].except(:extra) # Removing extra as it can overflow some session stores
+      
+      @user.errors.full_messages.each do |error_message|
+        flash[:alert] = error_message
+      end
+
       redirect_to new_user_registration_url
     end
   end
