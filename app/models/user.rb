@@ -4,6 +4,9 @@ class User < ApplicationRecord
 
   has_many :comments
 
+  has_many :likes
+  has_many :hearts, class_name: 'Like'
+  
   has_many :sent_friend_requests, class_name: 'FriendRequest',
                                   foreign_key: :sender_id
 
