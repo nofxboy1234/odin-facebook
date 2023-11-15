@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
 
       before { post.update!(content: 'hello') }
 
-      it 'has one post' do
+      it 'has 1 post' do
         expect(user.posts.count).to eq(1)
       end
 
@@ -46,5 +46,15 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # describe '#friendships'
+  describe '#friendships' do
+    context 'when a user is friends with 1 user' do
+      let!(:friendships) do
+        user.friendships << create(:friendship)
+      end
+
+      it 'has 1 friendship' do
+        expect(user.friendships.count).to eq(1)
+      end
+    end
+  end
 end
