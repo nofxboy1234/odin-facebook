@@ -5,10 +5,6 @@ RSpec.describe User, type: :model do
     create(:user)
   end
 
-  # let!(:friendship) do
-  #   create(:friendship)
-  # end
-  
   describe '#posts' do
     context 'when a user creates one post' do
       let!(:post) do
@@ -48,12 +44,33 @@ RSpec.describe User, type: :model do
 
   describe '#friendships' do
     context 'when a user is friends with 1 user' do
-      let!(:friendships) do
-        user.friendships << create(:friendship)
+      # let!(:friendships) do
+      #   user.friendships << create(:friendship)
+      # end
+
+      let!(:user2) do
+        create(:user)
+      end
+
+      let!(:friendship) do
+        create(:friendship)
+      end
+
+      before do
+        user.friendships << friendship
+        user2.friendships << friendship
       end
 
       it 'has 1 friendship' do
         expect(user.friendships.count).to eq(1)
+      end
+
+      it 'has a friendship with 2 people; itself and user2' do
+        expect(friendship.users.count).to eq(2)
+      end
+
+      it 'is friends with user2' do
+        expect(user.friendships.first.users).to include(user2)
       end
     end
   end
