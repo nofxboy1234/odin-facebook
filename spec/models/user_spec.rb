@@ -65,7 +65,7 @@ RSpec.describe User, type: :model do
         expect(user.friendships.count).to eq(1)
       end
 
-      it 'has a friendship with 2 people; itself and user2' do
+      it 'has a friendship with 2 people in it; itself and user2' do
         expect(friendship.users.count).to eq(2)
       end
 
