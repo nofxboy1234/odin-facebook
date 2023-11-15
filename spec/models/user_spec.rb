@@ -6,12 +6,24 @@ RSpec.describe User, type: :model do
   end
 
   let!(:post) do
-    create(:post, content: 'hello', author: user)
+    create(:post, author: user)
   end
 
+  # let!(:posts) do
+  #   create_list(:post, 2, author: user)
+  # end
+
+  # let!(:friendship) do
+  #   create(:friendship)
+  # end
+
   describe '#posts' do
-    context 'when the user creates one post' do
-      before { user.posts << post }
+    context 'when a user creates one post' do
+      before { post.update!(content: 'hello') }
+
+      it 'has one post' do
+        expect(user.posts.count).to eq(1)
+      end
 
       it 'shows that post in the array' do
         expect(user.posts).to include(post)
@@ -22,5 +34,13 @@ RSpec.describe User, type: :model do
         expect(first_post.content).to eql('hello')
       end
     end
+
+    # context 'when a user creates multiple posts' do
+
+
+    #   expect(user.posts)      
+    # end
   end
+
+  # describe '#friendships'
 end
