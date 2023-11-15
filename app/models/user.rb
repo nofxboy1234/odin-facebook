@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :friend_requests
+  has_many :friendships, through: :friend_requests
+  
   has_many :posts, foreign_key: :author_id
   has_one :profile
   has_many :notifications
@@ -7,9 +10,6 @@ class User < ApplicationRecord
   has_many :likes
   has_many :hearts, class_name: 'Like'
   
-  has_many :sent_friend_requests, class_name: 'FriendRequest',
-                                  foreign_key: :sender_id
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
