@@ -44,10 +44,6 @@ RSpec.describe User, type: :model do
 
   describe '#friendships' do
     context 'when user is in a friendship with user2' do
-      # let!(:friendships) do
-      #   user.friendships << create(:friendship)
-      # end
-
       let!(:user2) do
         create(:user)
       end
