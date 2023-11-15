@@ -5,17 +5,16 @@ RSpec.describe User, type: :model do
     create(:user)
   end
 
-  let!(:post) do
-    create(:post, author: user)
-  end
-
-
   # let!(:friendship) do
   #   create(:friendship)
   # end
-
+  
   describe '#posts' do
     context 'when a user creates one post' do
+      let!(:post) do
+        create(:post, author: user)
+      end
+
       before { post.update!(content: 'hello') }
 
       it 'has one post' do
@@ -36,9 +35,13 @@ RSpec.describe User, type: :model do
       let!(:posts) do
         create_list(:post, 2, author: user)
       end
-    
-      it 'has 3 posts' do
-        expect(user.posts.count).to eq(3)      
+
+      it 'has 2 posts' do
+        expect(user.posts.count).to eq(2)
+      end
+
+      it 'has the posts created' do
+        expect(user.posts).to eq(posts)
       end
     end
   end
