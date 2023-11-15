@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let!(:user) do
-    FactoryBot.create(:user)
+    create(:user)
   end
 
   let!(:post) do
-    FactoryBot.create(:post, content: 'hello', author: user)
+    create(:post, content: 'hello', author: user)
   end
 
   describe '#posts' do
