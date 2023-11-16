@@ -27,9 +27,6 @@ class User < ApplicationRecord
   end
 
   def send_friend_request(to_user, friend_request)
-    # to_user.received_friend_requests << create(:friend_request,
-    #                                            sender: self,
-    #                                            receiver: to_user)
     sent_friend_requests << friend_request
     to_user.received_friend_requests << friend_request
   end

@@ -120,10 +120,9 @@ RSpec.describe User, type: :model do
         expect(user.sent_friend_requests).to include(friend_request)
       end
 
-      # it 'the other user receives it' do
-      #   debugger
-      #   expect(recipient.received_friend_requests.count).to eq(1)
-      # end
+      it 'the recipient has it listed in received_friend_requests' do
+        expect(recipient.received_friend_requests).to include(friend_request)
+      end
     end
   end
 end
