@@ -51,11 +51,6 @@ RSpec.describe User, type: :model do
 
     context 'when a user has 1 sent friend requests' do
       before do
-        # user.sent_friend_requests.create!(
-        #   user: create(:user),
-        #   friendship: create(:friendship),
-        #   sender: create(:user)
-        # )
         user.sent_friend_requests << create(:friend_request)
       end
 
