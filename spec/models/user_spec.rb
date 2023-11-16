@@ -117,11 +117,11 @@ RSpec.describe User, type: :model do
       user.send_friend_request(recipient, friend_request)
     end
 
-    it 'the sender has it listed in sent_friend_requests' do
+    it 'the sender has the friend request listed in sent_friend_requests' do
       expect(user.sent_friend_requests).to include(friend_request)
     end
 
-    it 'the recipient has it listed in received_friend_requests' do
+    it 'the recipient has the friend request listed in received_friend_requests' do
       expect(recipient.received_friend_requests).to include(friend_request)
     end
   end
