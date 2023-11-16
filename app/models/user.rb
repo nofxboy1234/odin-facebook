@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: :sender_id
+
   has_many :friend_requests
   has_many :friendships, through: :friend_requests
   

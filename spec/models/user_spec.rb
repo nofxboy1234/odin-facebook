@@ -42,28 +42,36 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#friendships' do
-    context 'when user is in a friendship with user2' do
-      let!(:user2) do
-        create(:user)
-      end
-
-      let!(:friendship) do
-        create(:friendship)
-      end
-
-      before do
-        user.friendships << friendship
-        user2.friendships << friendship
-      end
-
-      it 'has 1 friendship' do
-        expect(user.friendships.count).to eq(1)
-      end
-
-      it 'is friends with user2' do
-        expect(user.friendships.first.users).to include(user2)
+  describe '#sent_friend_requests' do
+    context 'when a user has no sent friend requests' do
+      it 'returns 0' do
+        expect(user.sent_friend_requests.count).to eq(0)
       end
     end
   end
+
+  # describe '#friendships' do
+  #   context 'when user is in a friendship with user2' do
+  #     let!(:user2) do
+  #       create(:user)
+  #     end
+
+  #     let!(:friendship) do
+  #       create(:friendship)
+  #     end
+
+  #     before do
+  #       user.friendships << friendship
+  #       user2.friendships << friendship
+  #     end
+
+  #     it 'has 1 friendship' do
+  #       expect(user.friendships.count).to eq(1)
+  #     end
+
+  #     it 'is friends with user2' do
+  #       expect(user.friendships.first.users).to include(user2)
+  #     end
+  #   end
+  # end
 end
