@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   end
 
   describe '#posts' do
-    context 'when a user creates one post' do
+    context 'when a user creates one post with content: "hello"' do
       let!(:post) do
         create(:post, author: user)
       end
@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'when a user creates 3 posts' do
+    context 'when a user creates 2 posts' do
       let!(:posts) do
         create_list(:post, 2, author: user)
       end
