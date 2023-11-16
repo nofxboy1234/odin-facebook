@@ -102,5 +102,28 @@ RSpec.describe User, type: :model do
         expect(user.received_friend_requests.count).to eq(2)
       end
     end
+
+    context 'when a user sends a friend request' do
+      let!(:recipient) do
+        create(:user)
+      end
+
+      let!(:friend_request) do
+        create(:friend_request)
+      end
+
+      before do
+        user.send_friend_request(recipient, friend_request)
+      end
+
+      it 'the sender has it listed in sent_friend_requests' do
+        expect(user.sent_friend_requests).to include(friend_request)
+      end
+
+      # it 'the other user receives it' do
+      #   debugger
+      #   expect(recipient.received_friend_requests.count).to eq(1)
+      # end
+    end
   end
 end
