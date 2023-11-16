@@ -48,6 +48,18 @@ RSpec.describe User, type: :model do
         expect(user.sent_friend_requests.count).to eq(0)
       end
     end
+
+    context 'when a user has 1 sent friend requests' do
+      before do
+        # user.sent_friend_requests.create!(user: create(:user))
+        user.sent_friend_requests << create(:friend_request)
+      end
+
+      it 'returns 1' do
+        expect(user.sent_friend_requests.count).to eq(1)
+      end
+    end
+
   end
 
   # describe '#friendships' do
