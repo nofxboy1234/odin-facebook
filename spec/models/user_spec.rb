@@ -74,7 +74,33 @@ RSpec.describe User, type: :model do
         expect(user.sent_friend_requests.count).to eq(2)
       end
     end
-
   end
 
+  describe '#received_friend_requests' do
+    context 'when a user has no received friend requests' do
+      it 'returns 0' do
+        expect(user.received_friend_requests.count).to eq(0)
+      end
+    end
+
+    context 'when a user has 1 received friend requests' do
+      before do
+        user.received_friend_requests << create(:friend_request)
+      end
+
+      it 'returns 1' do
+        expect(user.received_friend_requests.count).to eq(1)
+      end
+    end
+
+    context 'when a user has 2 received friend requests' do
+      before do
+        user.received_friend_requests << create_list(:friend_request, 2)
+      end
+
+      it 'returns 2' do
+        expect(user.received_friend_requests.count).to eq(2)
+      end
+    end
+  end
 end

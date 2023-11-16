@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_16_085416) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_16_100055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,7 +30,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_16_085416) do
     t.bigint "user_id", null: false
     t.bigint "friendship_id", null: false
     t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
     t.index ["friendship_id"], name: "index_friend_requests_on_friendship_id"
+    t.index ["receiver_id"], name: "index_friend_requests_on_receiver_id"
     t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
     t.index ["user_id"], name: "index_friend_requests_on_user_id"
   end
@@ -91,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_16_085416) do
   add_foreign_key "comments", "users"
   add_foreign_key "friend_requests", "friendships"
   add_foreign_key "friend_requests", "users"
+  add_foreign_key "friend_requests", "users", column: "receiver_id"
   add_foreign_key "friend_requests", "users", column: "sender_id"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
