@@ -6,6 +6,12 @@ RSpec.describe User, type: :model do
   end
 
   describe '#posts' do
+    context 'when a user has no posts' do
+      it 'returns 0' do
+        expect(user.posts.count).to eq(0)
+      end
+    end
+
     context 'when a user creates one post with content: "hello"' do
       let!(:post) do
         create(:post, author: user)
@@ -13,7 +19,7 @@ RSpec.describe User, type: :model do
 
       before { post.update!(content: 'hello') }
 
-      it 'has 1 post' do
+      it 'returns 1' do
         expect(user.posts.count).to eq(1)
       end
 
@@ -32,7 +38,7 @@ RSpec.describe User, type: :model do
         create_list(:post, 2, author: user)
       end
 
-      it 'has 2 posts' do
+      it 'returns 2' do
         expect(user.posts.count).to eq(2)
       end
 
@@ -58,30 +64,17 @@ RSpec.describe User, type: :model do
         expect(user.sent_friend_requests.count).to eq(1)
       end
     end
+
+    context 'when a user has 2 sent friend requests' do
+      before do
+        user.sent_friend_requests << create_list(:friend_request, 2)
+      end
+
+      it 'returns 2' do
+        expect(user.sent_friend_requests.count).to eq(2)
+      end
+    end
+
   end
 
-  # describe '#friendships' do
-  #   context 'when user is in a friendship with user2' do
-  #     let!(:user2) do
-  #       create(:user)
-  #     end
-
-  #     let!(:friendship) do
-  #       create(:friendship)
-  #     end
-
-  #     before do
-  #       user.friendships << friendship
-  #       user2.friendships << friendship
-  #     end
-
-  #     it 'has 1 friendship' do
-  #       expect(user.friendships.count).to eq(1)
-  #     end
-
-  #     it 'is friends with user2' do
-  #       expect(user.friendships.first.users).to include(user2)
-  #     end
-  #   end
-  # end
 end
