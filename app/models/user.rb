@@ -1,10 +1,12 @@
 class User < ApplicationRecord
   has_many :friendships, lambda { |user|
-    # debugger
-
     unscope(where: :user_id).where('user_id = ? OR friend_id = ?', user.id, user.id)
+    # debugger
+    # unscope(*ActiveRecord::QueryMethods::VALID_UNSCOPING_VALUES).where('user_id = ? OR friend_id = ?', user.id, user.id)
   }
-  has_many :friends, through: :friendships, source: :friend_b
+  has_many :friends,
+           through: :friendships,
+           source: :friend_b
 
   has_many :friend_requests_as_sender,
            class_name: 'FriendRequest',
