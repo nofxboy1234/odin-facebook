@@ -1,9 +1,4 @@
 class User < ApplicationRecord
-  has_many :friendships, foreign_key: :user_id
-  # has_many :friendships, foreign_key: :friend_id
-  has_many :friends, through: :friendships
-
-
   has_many :friend_requests_as_sender,
            class_name: 'FriendRequest',
            foreign_key: :sender_id
@@ -12,13 +7,15 @@ class User < ApplicationRecord
            class_name: 'FriendRequest',
            foreign_key: :receiver_id
 
+
   has_many :friendships_as_friend_a,
            class_name: 'Friendship',
-           foreign_key: :friend_a_id
+           foreign_key: :user_id
 
   has_many :friendships_as_friend_b,
            class_name: 'Friendship',
-           foreign_key: :friend_b_id
+           foreign_key: :friend_id
+
 
   has_many :friend_as, through: :friendships_as_friend_b
   has_many :friend_bs, through: :friendships_as_friend_a
@@ -49,11 +46,11 @@ class User < ApplicationRecord
     to_user.received_friend_requests << friend_request
   end
 
-  # def friendships
-  #   friendships_as_friend_a + friendships_as_friend_b
-  # end
+  def friendships
+    friendships_as_friend_a + friendships_as_friend_b
+  end
 
-  # def friends
-  #   friend_as + friend_bs
-  # end
+  def friends
+    friend_as + friend_bs
+  end
 end
