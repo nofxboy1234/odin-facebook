@@ -13,21 +13,21 @@ class User < ApplicationRecord
            },
            through: :friendships
 
-  # has_many :friend_requests_as_sender,
-  #          class_name: 'FriendRequest',
-  #          foreign_key: :sender_id
+  has_many :friend_requests_as_sender,
+           class_name: 'FriendRequest',
+           foreign_key: :sender_id
 
-  # has_many :friend_requests_as_receiver,
-  #          class_name: 'FriendRequest',
-  #          foreign_key: :receiver_id
+  has_many :friend_requests_as_receiver,
+           class_name: 'FriendRequest',
+           foreign_key: :receiver_id
 
-  # has_many :posts, foreign_key: :author_id
-  # has_one :profile
-  # has_many :notifications
-  # has_many :comments
+  has_many :posts, foreign_key: :author_id
+  has_one :profile
+  has_many :notifications
+  has_many :comments
 
-  # has_many :likes
-  # has_many :hearts, class_name: 'Like'
+  has_many :likes
+  has_many :hearts, class_name: 'Like'
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
