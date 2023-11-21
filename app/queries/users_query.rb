@@ -1,11 +1,12 @@
 module UsersQuery
   extend self
 
-  def friends(user_id:, scope: false)
-    query = relation.joins(sql(scope:)).where.not(id: user_id)
+  def friends(user_id:)
+    query = relation.joins(sql).where.not(id: user_id)
 
-    query.where(friendships: { user_id: })
+    final_query = query.where(friendships: { user_id: })
          .or(query.where(friendships: { friend_id: user_id }))
+    debugger
   end
 
   private
@@ -15,16 +16,10 @@ module UsersQuery
   end
 
   def sql(scope: false)
-    if scope
-      <<~SQL
+    <<~SQL
+      INNER JOIN friendships
+        ON users.id = friendships.friend_id
         OR users.id = friendships.user_id
-      SQL
-    else
-      <<~SQL
-        INNER JOIN friendships
-          ON users.id = friendships.friend_id
-          OR users.id = friendships.user_id
-      SQL
-    end
+    SQL
   end
 end
