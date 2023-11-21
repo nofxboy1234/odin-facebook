@@ -10,7 +10,9 @@ class User < ApplicationRecord
 
   has_many :friends,
            lambda { |user|
-            UsersQuery.friends(user_id: user.id)
+            # UsersQuery.friends(user_id: user.id)
+            where.not(id: user.id)
+            .joins("OR users.id = friendships.user_id")
            },
            through: :friendships
 
