@@ -6,7 +6,6 @@ module UsersQuery
 
     final_query = query.where(friendships: { user_id: })
          .or(query.where(friendships: { friend_id: user_id }))
-    debugger
   end
 
   private

@@ -5,12 +5,9 @@ class User < ApplicationRecord
                .where(user_id: user.id)
                .or(Friendship.where(friend_id: user.id))
            }
-  #  inverse_of: :user,
-  #  dependent: :destroy
 
   has_many :friends,
            lambda { |user|
-            # UsersQuery.friends(user_id: user.id)
             where.not(id: user.id)
             .joins("OR users.id = friendships.user_id")
            },
