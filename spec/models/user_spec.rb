@@ -110,7 +110,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-
   describe '#friend_requests_as_sender', friend_requests_as_sender: true do
     context 'when a user has not sent any friend requests' do
       it 'returns 0' do
@@ -336,6 +335,41 @@ RSpec.describe User, type: :model do
       it 'has 2 hearts and 2 likes' do
         expect(user.hearts.count).to eq(2)
         expect(user.likes.count).to eq(2)
+      end
+    end
+  end
+
+  describe '.from_omniauth', from_omniauth: true do
+    context 'when a user with the provided attributes exists in :users table' do
+      let!(:logging_in_user) do
+        create(:user,
+               provider: 'fun_provider',
+               uid: 'fun_uid')
+      end
+
+      let!(:info) do
+        double('info', email: 'logging_in_user@example.com')
+      end
+
+      let!(:auth) do
+        double('auth',
+               provider: 'fun_provider',
+               uid: 'fun_uid',
+               info:)
+      end
+
+      it 'receives :provider message once' do
+        expect(auth).to receive(:provider)
+        User.from_omniauth(auth)
+      end
+
+      it 'receives :uid message once' do
+        expect(auth).to receive(:uid)
+        User.from_omniauth(auth)
+      end
+
+      it 'returns logging_in_user' do
+        expect(User.from_omniauth(auth)).to eq(logging_in_user)
       end
     end
   end
