@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
     create(:user)
   end
 
-  describe '#friendships' do
+  describe '#friendships', friendships: true do
     context 'when a user has no friendships' do
       it 'has a count of 0' do
         expect(user.friendships.count).to eq(0)
@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#friend_requests_as_sender' do
+  describe '#friend_requests_as_sender', friend_requests_as_sender: true do
     context 'when a user has not sent any friend requests' do
       it 'returns 0' do
         expect(user.friend_requests_as_sender.count).to eq(0)
@@ -82,7 +82,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#friend_requests_as_receiver' do
+  describe '#friend_requests_as_receiver', friend_requests_as_receiver: true do
     context 'when a user has not received any friend requests' do
       it 'returns 0' do
         expect(user.friend_requests_as_receiver.count).to eq(0)
@@ -110,7 +110,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#posts' do
+  describe '#posts', posts: true do
     context 'when a user has no posts' do
       it 'returns 0' do
         expect(user.posts.count).to eq(0)
@@ -153,7 +153,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#profile' do
+  describe '#profile', profile: true do
     context 'when a user has created a profile' do
       let!(:profile) do
         user.create_profile!
@@ -165,7 +165,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#notifications' do
+  describe '#notifications', notifications: true do
     context 'when a user has received no notifications' do
       it 'has 0 notifications' do
         expect(user.notifications.count).to eq(0)
@@ -193,7 +193,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#comments' do
+  describe '#comments', comments: true do
     context 'when a user has made no comments' do
       it 'has 0 comments' do
         expect(user.comments.count).to eq(0)
@@ -221,7 +221,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#likes' do
+  describe '#likes', likes: true do
     context 'when a user has not liked any posts' do
       it 'has 0 likes and 0 hearts' do
         expect(user.likes.count).to eq(0)
@@ -252,7 +252,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#hearts' do
+  describe '#hearts', true do
     context 'when a user has not hearted any posts' do
       it 'has 0 hearts and 0 likes' do
         expect(user.hearts.count).to eq(0)
