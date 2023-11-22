@@ -5,6 +5,36 @@ RSpec.describe User, type: :model do
     create(:user)
   end
 
+  describe '#friendships' do
+    context 'when a user has no friendships' do
+      it 'has a count of 0' do
+        expect(user.friendships.count).to eq(0)
+      end
+    end
+
+    context 'when a user has 1 friendship' do
+      before do
+        user.friendships.create!(friend: create(:user))
+      end
+
+      it 'has a count of 1' do
+        expect(user.friendships.count).to eq(1)
+      end
+    end
+
+    context 'when a user has 2 friendships' do
+      before do
+        user.friendships.create!(friend: create(:user))
+        user.friendships.create!(friend: create(:user))
+      end
+
+      it 'has a count of 2' do
+        expect(user.friendships.count).to eq(2)
+      end
+    end
+
+  end
+
   describe '#friend_requests_as_sender' do
     context 'when a user has not sent any friend requests' do
       it 'returns 0' do
