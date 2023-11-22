@@ -33,6 +33,25 @@ RSpec.describe User, type: :model do
       end
     end
 
+    context 'when user has a friendship initiated by another user' do
+      let!(:friendship) do
+        create(:friendship, friend: user)
+      end
+
+      it 'has that friendship in its list of friendships' do
+        expect(user.friendships).to include(friendship)
+      end
+    end
+
+    context 'when user has a friendship initiated by itself' do
+      let!(:friendship) do
+        create(:friendship, user:, friend: create(:user))
+      end
+
+      it 'has that friendship in its list of friendships' do
+        expect(user.friendships).to include(friendship)
+      end
+    end
   end
 
   describe '#friend_requests_as_sender' do
@@ -263,8 +282,6 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-
 
   # describe '#send_friend_request' do
   #   let!(:sender) do
