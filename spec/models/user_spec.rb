@@ -347,15 +347,10 @@ RSpec.describe User, type: :model do
                uid: 'fun_uid')
       end
 
-      let!(:info) do
-        double('info', email: 'logging_in_user@example.com')
-      end
-
       let!(:auth) do
         double('auth',
                provider: 'fun_provider',
-               uid: 'fun_uid',
-               info:)
+               uid: 'fun_uid')
       end
 
       it 'receives :provider message once' do
