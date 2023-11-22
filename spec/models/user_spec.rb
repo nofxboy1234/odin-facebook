@@ -391,10 +391,10 @@ RSpec.describe User, type: :model do
       end
 
       it 'creates the user in :users table' do
-        expect {User.from_omniauth(auth)}.to change {User.count}.by(1)
+        expect { User.from_omniauth(auth) }.to change { User.count }.by(1)
       end
 
-      it 'returns logging_in_user' do
+      it 'returns a User with the same email as the auth email' do
         expect(User.from_omniauth(auth).email)
           .to eq('new_logging_in_user@example.com')
       end
