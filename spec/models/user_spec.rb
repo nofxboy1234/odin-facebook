@@ -45,7 +45,7 @@ RSpec.describe User, type: :model do
 
     context 'when user has a friendship initiated by itself' do
       let!(:friendship) do
-        create(:friendship, user:, friend: create(:user))
+        create(:friendship, user:)
       end
 
       it 'has that friendship in its list of friendships' do
@@ -53,6 +53,63 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#friends', friends: true do
+    context 'when a user has no friends' do
+      it 'has a count of 0' do
+        expect(user.friends.count).to eq(0)
+      end
+    end
+
+    context 'when a user has 1 friend' do
+      before do
+        user.friends << create(:user)
+      end
+
+      it 'has a count of 1' do
+        expect(user.friends.count).to eq(1)
+      end
+    end
+
+    context 'when a user has 2 friends' do
+      before do
+        user.friends << create_list(:user, 2)
+      end
+
+      it 'has a count of 2' do
+        expect(user.friends.count).to eq(2)
+      end
+    end
+
+    context 'when user is added as a friend by another user' do
+      let!(:another_user) do
+        create(:user)
+      end
+
+      before do
+        another_user.friends << user
+      end
+
+      it 'has that friend in its list of friends' do
+        expect(user.friends).to include(another_user)
+      end
+    end
+
+    context 'when user adds a friend itself' do
+      let!(:another_user) do
+        create(:user)
+      end
+
+      before do
+        user.friends << another_user
+      end
+
+      it 'has that friend in its list of friends' do
+        expect(user.friends).to include(another_user)
+      end
+    end
+  end
+
 
   describe '#friend_requests_as_sender', friend_requests_as_sender: true do
     context 'when a user has not sent any friend requests' do
