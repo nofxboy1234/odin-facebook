@@ -367,6 +367,38 @@ RSpec.describe User, type: :model do
         expect(User.from_omniauth(auth)).to eq(logging_in_user)
       end
     end
+
+    context 'when a user with the provided attributes does not exist in :users table' do
+      let!(:info) do
+        double('info', email: 'new_logging_in_user@example.com')
+      end
+
+      let!(:auth) do
+        double('auth',
+               provider: 'fun_provider',
+               uid: 'fun_uid',
+               info:)
+      end
+
+      it 'receives :provider message once' do
+        expect(auth).to receive(:provider)
+        User.from_omniauth(auth)
+      end
+
+      it 'receives :uid message once' do
+        expect(auth).to receive(:uid)
+        User.from_omniauth(auth)
+      end
+
+      it 'creates the user in :users table' do
+        expect {User.from_omniauth(auth)}.to change {User.count}.by(1)
+      end
+
+      it 'returns logging_in_user' do
+        expect(User.from_omniauth(auth).email)
+          .to eq('new_logging_in_user@example.com')
+      end
+    end
   end
 
   # describe '#send_friend_request' do
