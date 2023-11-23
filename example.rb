@@ -1,11 +1,16 @@
 class Example
+  def initialize(input: $stdin, output: $stdout)
+    @input = input
+    @output = output
+  end
+
   def ask_for_number
-    puts 'Input an integer 5 or above'
+    @output.puts 'Input an integer 5 or above'
     loop do
-      input = gets.to_i
+      input = @input.gets.to_i
       return true if input >= 5
 
-      puts 'Invalid. Try again:'
+      @output.puts 'Invalid. Try again:'
     end
   end
 end
