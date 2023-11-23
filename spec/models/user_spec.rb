@@ -428,30 +428,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-  # describe '#send_friend_request' do
-  #   let!(:sender) do
-  #     user
-  #   end
-
-  #   let!(:receiver) do
-  #     create(:user)
-  #   end
-
-  #   let!(:friend_request) do
-  #     create(:friend_request)
-  #   end
-
-  #   before do
-  #     sender.send_friend_request(receiver, friend_request)
-  #   end
-
-  #   it 'the sender has the friend request listed in sent_friend_requests' do
-  #     expect(sender.sent_friend_requests).to include(friend_request)
-  #   end
-
-  #   it 'the receiver has the friend request listed in received_friend_requests' do
-  #     expect(receiver.received_friend_requests).to include(friend_request)
-  #   end
-  # end
 end
