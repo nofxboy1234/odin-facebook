@@ -8,9 +8,9 @@ class User < ApplicationRecord
 
   has_many :friends,
            lambda { |user|
-            # Don't get Users with the user's id (can't be friends with yourself)
-            # Add Friendship.user_id to the join condition so we also
-            # get any Users that added us as a friend
+             # Don't get Users with the user's id (can't be friends with yourself)
+             # Add Friendship.user_id to the join condition so we also
+             # get any Users that added us as a friend
              where.not(id: user.id)
                   .joins('OR users.id = friendships.user_id')
            },
@@ -44,9 +44,4 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
     end
   end
-
-  # def send_friend_request(to_user, friend_request)
-  #   sent_friend_requests << friend_request
-  #   to_user.received_friend_requests << friend_request
-  # end
 end
