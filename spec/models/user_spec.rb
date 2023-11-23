@@ -8,7 +8,8 @@ RSpec.describe User, type: :model do
   describe '#friendships', friendships: true do
     context 'when a user has no friendships' do
       it 'has a count of 0' do
-        expect(user.friendships.count).to eq(0)
+        count = user.friendships.count
+        expect(count).to eq(0)
       end
     end
 
@@ -18,7 +19,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'has a count of 1' do
-        expect(user.friendships.count).to eq(1)
+        count = user.friendships.count
+        expect(count).to eq(1)
       end
     end
 
@@ -29,7 +31,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'has a count of 2' do
-        expect(user.friendships.count).to eq(2)
+        count = user.friendships.count
+        expect(count).to eq(2)
       end
     end
 
@@ -57,7 +60,8 @@ RSpec.describe User, type: :model do
   describe '#friends', friends: true do
     context 'when a user has no friends' do
       it 'has a count of 0' do
-        expect(user.friends.count).to eq(0)
+        count = user.friends.count
+        expect(count).to eq(0)
       end
     end
 
@@ -67,7 +71,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'has a count of 1' do
-        expect(user.friends.count).to eq(1)
+        count = user.friends.count
+        expect(count).to eq(1)
       end
     end
 
@@ -77,7 +82,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'has a count of 2' do
-        expect(user.friends.count).to eq(2)
+        count = user.friends.count
+        expect(count).to eq(2)
       end
     end
 
@@ -113,7 +119,8 @@ RSpec.describe User, type: :model do
   describe '#friend_requests_as_sender', friend_requests_as_sender: true do
     context 'when a user has not sent any friend requests' do
       it 'returns 0' do
-        expect(user.friend_requests_as_sender.count).to eq(0)
+        count = user.friend_requests_as_sender.count
+        expect(count).to eq(0)
       end
     end
 
@@ -123,7 +130,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'returns 1' do
-        expect(user.friend_requests_as_sender.count).to eq(1)
+        count = user.friend_requests_as_sender.count
+        expect(count).to eq(1)
       end
     end
 
@@ -133,7 +141,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'returns 2' do
-        expect(user.friend_requests_as_sender.count).to eq(2)
+        count = user.friend_requests_as_sender.count
+        expect(count).to eq(2)
       end
     end
   end
@@ -141,7 +150,8 @@ RSpec.describe User, type: :model do
   describe '#friend_requests_as_receiver', friend_requests_as_receiver: true do
     context 'when a user has not received any friend requests' do
       it 'returns 0' do
-        expect(user.friend_requests_as_receiver.count).to eq(0)
+        count = user.friend_requests_as_receiver.count
+        expect(count).to eq(0)
       end
     end
 
@@ -151,7 +161,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'returns 1' do
-        expect(user.friend_requests_as_receiver.count).to eq(1)
+        count = user.friend_requests_as_receiver.count
+        expect(count).to eq(1)
       end
     end
 
@@ -161,7 +172,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'returns 2' do
-        expect(user.friend_requests_as_receiver.count).to eq(2)
+        count = user.friend_requests_as_receiver.count
+        expect(count).to eq(2)
       end
     end
   end
@@ -169,7 +181,8 @@ RSpec.describe User, type: :model do
   describe '#posts', posts: true do
     context 'when a user has no posts' do
       it 'returns 0' do
-        expect(user.posts.count).to eq(0)
+        count = user.posts.count
+        expect(count).to eq(0)
       end
     end
 
@@ -181,7 +194,8 @@ RSpec.describe User, type: :model do
       before { post.update!(content: 'hello') }
 
       it 'returns 1' do
-        expect(user.posts.count).to eq(1)
+        count = user.posts.count
+        expect(count).to eq(1)
       end
 
       it 'shows that post in the array' do
@@ -200,7 +214,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'returns 2' do
-        expect(user.posts.count).to eq(2)
+        count = user.posts.count
+        expect(count).to eq(2)
       end
 
       it 'has the posts created' do
@@ -224,7 +239,8 @@ RSpec.describe User, type: :model do
   describe '#notifications', notifications: true do
     context 'when a user has received no notifications' do
       it 'has 0 notifications' do
-        expect(user.notifications.count).to eq(0)
+        count = user.notifications.count
+        expect(count).to eq(0)
       end
     end
 
@@ -234,7 +250,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'has 1 notification' do
-        expect(user.notifications.count).to eq(1)
+        count = user.notifications.count
+        expect(count).to eq(1)
       end
     end
 
@@ -244,7 +261,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'has 2 notifications' do
-        expect(user.notifications.count).to eq(2)
+        count = user.notifications.count
+        expect(count).to eq(2)
       end
     end
   end
@@ -252,7 +270,8 @@ RSpec.describe User, type: :model do
   describe '#comments', comments: true do
     context 'when a user has made no comments' do
       it 'has 0 comments' do
-        expect(user.comments.count).to eq(0)
+        count = user.comments.count
+        expect(count).to eq(0)
       end
     end
 
@@ -262,7 +281,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'has 1 like' do
-        expect(user.comments.count).to eq(1)
+        count = user.comments.count
+        expect(count).to eq(1)
       end
     end
 
@@ -272,7 +292,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'has 2 comments' do
-        expect(user.comments.count).to eq(2)
+        count = user.comments.count
+        expect(count).to eq(2)
       end
     end
   end
@@ -280,8 +301,10 @@ RSpec.describe User, type: :model do
   describe '#likes', likes: true do
     context 'when a user has not liked any posts' do
       it 'has 0 likes and 0 hearts' do
-        expect(user.likes.count).to eq(0)
-        expect(user.hearts.count).to eq(0)
+        likes_count = user.likes.count
+        expect(likes_count).to eq(0)
+        hearts_count = user.hearts.count
+        expect(hearts_count).to eq(0)
       end
     end
 
@@ -291,8 +314,10 @@ RSpec.describe User, type: :model do
       end
 
       it 'has 1 like and 1 heart' do
-        expect(user.likes.count).to eq(1)
-        expect(user.hearts.count).to eq(1)
+        likes_count = user.likes.count
+        expect(likes_count).to eq(1)
+        hearts_count = user.hearts.count
+        expect(hearts_count).to eq(1)
       end
     end
 
@@ -302,8 +327,10 @@ RSpec.describe User, type: :model do
       end
 
       it 'has 2 likes and 2 hearts' do
-        expect(user.likes.count).to eq(2)
-        expect(user.hearts.count).to eq(2)
+        likes_count = user.likes.count
+        expect(likes_count).to eq(2)
+        hearts_count = user.hearts.count
+        expect(hearts_count).to eq(2)
       end
     end
   end
@@ -311,8 +338,11 @@ RSpec.describe User, type: :model do
   describe '#hearts', true do
     context 'when a user has not hearted any posts' do
       it 'has 0 hearts and 0 likes' do
-        expect(user.hearts.count).to eq(0)
-        expect(user.likes.count).to eq(0)
+        hearts_count = user.hearts.count
+        expect(hearts_count).to eq(0)
+        likes_count = user.likes.count
+        expect(likes_count).to eq(0)
+
       end
     end
 
@@ -322,8 +352,10 @@ RSpec.describe User, type: :model do
       end
 
       it 'has 1 heart and 1 like' do
-        expect(user.hearts.count).to eq(1)
-        expect(user.likes.count).to eq(1)
+        hearts_count = user.hearts.count
+        expect(hearts_count).to eq(1)
+        likes_count = user.likes.count
+        expect(likes_count).to eq(1)
       end
     end
 
@@ -333,8 +365,10 @@ RSpec.describe User, type: :model do
       end
 
       it 'has 2 hearts and 2 likes' do
-        expect(user.hearts.count).to eq(2)
-        expect(user.likes.count).to eq(2)
+        hearts_count = user.hearts.count
+        expect(hearts_count).to eq(2)
+        likes_count = user.likes.count
+        expect(likes_count).to eq(2)
       end
     end
   end
