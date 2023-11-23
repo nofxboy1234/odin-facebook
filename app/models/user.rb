@@ -44,4 +44,8 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
     end
   end
+
+  def send_friend_request(to:)
+    friend_requests_as_sender.create!(receiver: to)
+  end
 end

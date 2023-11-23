@@ -428,4 +428,28 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#send_friend_request', send_friend_request: true do
+    let!(:user1) do
+      create(:user)
+    end
+  
+    let!(:user2) do
+      create(:user)
+    end
+
+    context 'when user1 sends a friend_request to user2' do
+      it 'friend_request is added to user1.friend_requests_as_sender' do
+        friend_request = user1.send_friend_request(to: user2)
+        expect(user1.friend_requests_as_sender).to include(friend_request)
+      end
+    end
+
+    context 'when user1 sends a friend_request to user2' do
+      it 'friend_request is added to user2.friend_requests_as_receiver' do
+        friend_request = user1.send_friend_request(to: user2)
+        expect(user2.friend_requests_as_receiver).to include(friend_request)
+      end
+    end
+  end
 end
