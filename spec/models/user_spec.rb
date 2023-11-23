@@ -353,14 +353,8 @@ RSpec.describe User, type: :model do
                uid: 'fun_uid')
       end
 
-      it 'receives :provider message once' do
-        expect(auth).to receive(:provider)
-        User.from_omniauth(auth)
-      end
-
-      it 'receives :uid message once' do
-        expect(auth).to receive(:uid)
-        User.from_omniauth(auth)
+      it 'does not change :users table' do
+        expect { User.from_omniauth(auth) }.not_to change { User.count }
       end
 
       it 'returns logging_in_user' do
@@ -380,21 +374,11 @@ RSpec.describe User, type: :model do
                info:)
       end
 
-      it 'receives :provider message once' do
-        expect(auth).to receive(:provider)
-        User.from_omniauth(auth)
-      end
-
-      it 'receives :uid message once' do
-        expect(auth).to receive(:uid)
-        User.from_omniauth(auth)
-      end
-
       it 'creates the user in :users table' do
         expect { User.from_omniauth(auth) }.to change { User.count }.by(1)
       end
 
-      it 'returns a User with the same email as the auth email' do
+      it 'returns a new User with the same email as the auth email' do
         expect(User.from_omniauth(auth).email)
           .to eq('new_logging_in_user@example.com')
       end
