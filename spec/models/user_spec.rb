@@ -353,6 +353,11 @@ RSpec.describe User, type: :model do
                uid: 'fun_uid')
       end
 
+      it ':auth does not receive message :info' do
+        expect(auth).not_to receive(:info)
+        User.from_omniauth(auth)
+      end
+
       it 'does not change :users table' do
         expect { User.from_omniauth(auth) }.not_to change { User.count }
       end
@@ -372,6 +377,11 @@ RSpec.describe User, type: :model do
                provider: 'fun_provider',
                uid: 'fun_uid',
                info:)
+      end
+
+      it ':auth does not receive message :info' do
+        expect(auth).to receive(:info)
+        User.from_omniauth(auth)
       end
 
       it 'creates the user in :users table' do
