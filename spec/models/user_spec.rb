@@ -359,7 +359,7 @@ RSpec.describe User, type: :model do
       end
 
       it 'does not change :users table' do
-        expect { User.from_omniauth(auth) }.not_to change { User.count }
+        expect { User.from_omniauth(auth) }.not_to(change { User.count })
       end
 
       it 'returns logging_in_user' do
