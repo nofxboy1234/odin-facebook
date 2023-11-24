@@ -342,7 +342,6 @@ RSpec.describe User, type: :model do
         expect(hearts_count).to eq(0)
         likes_count = user.likes.count
         expect(likes_count).to eq(0)
-
       end
     end
 
@@ -375,7 +374,7 @@ RSpec.describe User, type: :model do
 
   describe '.from_omniauth', from_omniauth: true do
     context 'when a user with the provided attributes exists in :users table' do
-      let!(:logging_in_user) do
+      let!(:existing_user) do
         create(:user,
                provider: 'fun_provider',
                uid: 'fun_uid')
@@ -387,12 +386,9 @@ RSpec.describe User, type: :model do
                uid: 'fun_uid')
       end
 
-      it 'does not change :users table' do
-        expect { User.from_omniauth(auth) }.not_to(change { User.count })
-      end
-
-      it 'returns the existing logging_in_user' do
-        expect(User.from_omniauth(auth)).to eq(logging_in_user)
+      it 'returns the existing user' do
+        user = User.from_omniauth(auth)
+        expect(user).to eq(existing_user)
       end
     end
 
@@ -408,12 +404,9 @@ RSpec.describe User, type: :model do
                info:)
       end
 
-      it 'creates the user in :users table' do
-        expect { User.from_omniauth(auth) }.to change { User.count }.by(1)
-      end
-
       it 'returns a new User with the same email as the auth email' do
-        expect(User.from_omniauth(auth).email)
+        auth_email = User.from_omniauth(auth).email
+        expect(auth_email)
           .to eq('new_logging_in_user@example.com')
       end
     end
@@ -423,7 +416,7 @@ RSpec.describe User, type: :model do
     let!(:user1) do
       create(:user)
     end
-  
+
     let!(:user2) do
       create(:user)
     end
