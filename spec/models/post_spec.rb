@@ -32,4 +32,16 @@ RSpec.describe Post, type: :model do
       end
     end
   end
+
+  describe '#likes' do
+    context 'when a post has been liked' do
+      let!(:likes) do
+        post.likes << create_list(:like, 3)
+      end
+
+      it 'returns the likes it has' do
+        expect(post.likes).to be(likes)
+      end
+    end
+  end
 end
