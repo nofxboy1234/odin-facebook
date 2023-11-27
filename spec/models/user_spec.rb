@@ -407,15 +407,15 @@ RSpec.describe User, type: :model do
                uid: 'fun_uid',
                info:)
       end
+      
+      it 'creates the user in :users table' do
+        expect { User.from_omniauth(auth) }.to change { User.count }.by(1)
+      end
 
       it 'returns a new User with the same email as the auth email' do
         auth_email = User.from_omniauth(auth).email
         expect(auth_email)
           .to eq('new_logging_in_user@example.com')
-      end
-
-      it 'creates the user in :users table' do
-        expect { User.from_omniauth(auth) }.to change { User.count }.by(1)
       end
     end
   end
