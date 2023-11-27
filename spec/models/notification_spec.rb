@@ -16,4 +16,20 @@ RSpec.describe Notification, type: :model do
       end
     end
   end
+
+  describe '#user' do
+    subject!(:notification) do
+      create(:notification, user:)
+    end
+
+    let!(:user) do
+      create(:user)
+    end
+
+    context 'when a notification belongs to a user' do
+      it 'returns the user it belongs to' do
+        expect(notification.user).to be(user)
+      end
+    end
+  end
 end
