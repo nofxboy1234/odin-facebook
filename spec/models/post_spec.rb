@@ -24,11 +24,11 @@ RSpec.describe Post, type: :model do
   describe '#comments' do
     context 'when a post has comments on it' do
       let!(:comments) do
-        post.comments << create_list(:comment, 2)
+        create_list(:comment, 2, post:)
       end
 
       it 'returns the comments it has' do
-        expect(post.comments).to be(comments)
+        expect(post.comments).to eq(comments)
       end
     end
   end
@@ -40,7 +40,7 @@ RSpec.describe Post, type: :model do
       end
 
       it 'returns the likes it has' do
-        expect(post.likes).to eq(likes)
+        expect(post.likes).to be(likes)
       end
     end
   end
