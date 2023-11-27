@@ -44,4 +44,28 @@ RSpec.describe FriendRequest, type: :model do
       end
     end
   end
+
+  describe '#accept' do
+    context 'when user2 accepts a friend request from user1' do
+      it 'creates a new friendship' do
+        expect { friend_request.accept }.to change { Friendship.count }.by(1)
+      end
+
+      it 'returns the new Friendship instance' do
+        expect(friend_request.accept).to eq(Friendship.last)
+      end
+
+      it 'has user1 as the last Friendship added user' do
+        friend_request.accept
+        user = Friendship.last.user
+        expect(user).to eq(user1)
+      end
+
+      it 'has user2 as the last Friendship added friend' do
+        friend_request.accept
+        friend = Friendship.last.friend
+        expect(friend).to eq(user2)
+      end
+    end
+  end
 end
