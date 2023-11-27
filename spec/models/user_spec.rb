@@ -386,6 +386,10 @@ RSpec.describe User, type: :model do
                uid: 'fun_uid')
       end
 
+      it 'does not change :users table' do
+        expect { User.from_omniauth(auth) }.not_to(change { User.count })
+      end
+
       it 'returns the existing user' do
         user = User.from_omniauth(auth)
         expect(user).to eq(existing_user)
@@ -408,6 +412,10 @@ RSpec.describe User, type: :model do
         auth_email = User.from_omniauth(auth).email
         expect(auth_email)
           .to eq('new_logging_in_user@example.com')
+      end
+
+      it 'creates the user in :users table' do
+        expect { User.from_omniauth(auth) }.to change { User.count }.by(1)
       end
     end
   end
