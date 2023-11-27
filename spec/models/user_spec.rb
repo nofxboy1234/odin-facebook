@@ -407,7 +407,7 @@ RSpec.describe User, type: :model do
                uid: 'fun_uid',
                info:)
       end
-      
+
       it 'creates the user in :users table' do
         expect { User.from_omniauth(auth) }.to change { User.count }.by(1)
       end
