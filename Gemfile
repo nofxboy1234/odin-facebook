@@ -59,6 +59,9 @@ group :development, :test do
 
   gem 'omniauth-github', '~> 2.0.0'
   gem 'omniauth-rails_csrf_protection'
+
+  gem 'guard'
+  gem 'guard-rspec'
 end
 
 group :development do
