@@ -40,7 +40,7 @@ RSpec.describe Post, type: :model do
       end
 
       it 'returns the likes it has' do
-        expect(post.likes).to be(likes)
+        expect(post.likes).to eq(likes)
       end
     end
   end
