@@ -46,6 +46,13 @@ class User < ApplicationRecord
   end
 
   def send_friend_request(to:)
-    friend_requests_as_sender.create!(receiver: to)
+    notification = send_notification(to:)
+    friend_requests_as_sender.create!(receiver: to, notification:)
+  end
+  
+  private
+  
+  def send_notification(to:)
+    Notification.create!(user: to)
   end
 end

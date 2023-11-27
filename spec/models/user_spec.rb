@@ -434,12 +434,15 @@ RSpec.describe User, type: :model do
         friend_request = user1.send_friend_request(to: user2)
         expect(user1.friend_requests_as_sender).to include(friend_request)
       end
-    end
 
-    context 'when user1 sends a friend_request to user2' do
       it 'friend_request is added to user2.friend_requests_as_receiver' do
         friend_request = user1.send_friend_request(to: user2)
         expect(user2.friend_requests_as_receiver).to include(friend_request)
+      end
+
+      it 'sends a notification to user2' do
+        expect(Notification).to receive(:create!).with(user: user2).and_call_original
+        user1.send_friend_request(to: user2)
       end
     end
   end

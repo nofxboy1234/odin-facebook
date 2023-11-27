@@ -1,4 +1,4 @@
 class Notification < ApplicationRecord
-  has_many :friend_requests
+  has_one :friend_request
   belongs_to :user
 end
