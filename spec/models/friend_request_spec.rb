@@ -15,7 +15,7 @@ RSpec.describe FriendRequest, type: :model do
 
   describe '#sender', sender: true do
     context 'when user1 sends a FriendRequest to user2' do
-      it 'has a sender that is user1' do
+      it 'returns a sender that is user1' do
         sender = friend_request.sender
         expect(sender).to be(user1)
       end
@@ -24,7 +24,7 @@ RSpec.describe FriendRequest, type: :model do
 
   describe '#receiver', receiver: true do
     context 'when user1 sends a FriendRequest to user2' do
-      it 'has a receiver that is user2' do
+      it 'returns a receiver that is user2' do
         receiver = friend_request.receiver
         expect(receiver).to be(user2)
       end
