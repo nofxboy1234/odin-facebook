@@ -67,4 +67,6 @@ guard :rspec, cmd: "bundle exec rspec", failed_mode: :keep do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
+
+  notification :off
 end
