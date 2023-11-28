@@ -1,1 +1,8 @@
 Users
+
+<% @users.each do |user| %>
+  <div><%= user.email %></div>
+<% end %>
+<br>
+<div>current_user: <%= current_user.email %></div>
+<div>user_signed_in?: <%= user_signed_in? %></div>

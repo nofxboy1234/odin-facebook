@@ -66,8 +66,8 @@ RSpec.configure do |config|
   config.formatter = :documentation
 
   config.before(:each, type: :system) do
-    # driven_by :selenium_chrome
-    driven_by :selenium_chrome_headless
+    driven_by :selenium_chrome
+    # driven_by :selenium_chrome_headless
   end
 
   config.include Warden::Test::Helpers

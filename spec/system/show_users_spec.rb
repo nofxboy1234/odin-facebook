@@ -10,7 +10,7 @@ RSpec.describe "ShowUsers", type: :system do
     it 'shows all users' do
       p "Capybara.current_driver -- #{Capybara.current_driver}"
       visit users_path
-      sleep(5)
+      sleep(8)
       expect(page).to have_content('Users')
     end
   end
