@@ -5,3 +5,7 @@ one:
 two:
   email: fixture_user2@example.com
   encrypted_password: 111111
+
+three:
+  email: fixture_user3@example.com
+  encrypted_password: 111111

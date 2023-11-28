@@ -8,16 +8,20 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# puts 'seeding database...'
-
+# puts "\n== Seeding the database manually =="
 # User.destroy_all
-
-# User.create!( email: 'user1@example.com', password: '111111' )
-# User.create!( email: 'user2@example.com', password: '111111' )
-# User.create!( email: 'user3@example.com', password: '111111' )
-
+# User.create!( email: 'manual_user1@example.com', password: '111111' )
+# User.create!( email: 'manual_user2@example.com', password: '111111' )
+# User.create!( email: 'manual_user3@example.com', password: '111111' )
 # puts 'seeding complete!'
 
 
 puts "\n== Seeding the database with fixtures =="
 system("bin/rails db:fixtures:load FIXTURES_PATH=spec/fixtures")
+puts 'seeding complete!'
+
+
+# puts "\n== Seeding the database with FactoryBot (not recommended by ThoughtBot...) =="
+# User.destroy_all
+# FactoryBot.create_list(:user, 3)
+# puts 'seeding complete!'
