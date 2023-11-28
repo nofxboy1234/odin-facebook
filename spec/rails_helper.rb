@@ -61,15 +61,14 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.include FactoryBot::Syntax::Methods
-
+  
   config.formatter = :documentation
-
   config.before(:each, type: :system) do
-    driven_by :selenium_chrome
-    # driven_by :selenium_chrome_headless
+    # driven_by :selenium_chrome
+    driven_by :selenium_chrome_headless
   end
-
+  
+  config.include FactoryBot::Syntax::Methods
   config.include Warden::Test::Helpers
 end
 
