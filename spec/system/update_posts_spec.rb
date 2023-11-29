@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "UpdatePosts", type: :system do
+RSpec.describe "Updating a post", type: :system do
   let!(:existing_user) do
     create(:user)
   end
