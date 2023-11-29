@@ -17,10 +17,12 @@ RSpec.describe "Deleting a post", type: :system do
 
 
     visit post_path(post)
+
     click_button 'Destroy this post'
 
-    # accept_alert
+    accept_alert
 
+    sleep(0.1)
     expect(page).not_to have_content('Remove me')
   end
 end
