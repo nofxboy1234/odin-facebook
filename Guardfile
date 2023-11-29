@@ -69,4 +69,5 @@ guard :rspec, cmd: "bundle exec rspec", failed_mode: :keep do
   end
 
   notification :off
+  clearing :on
 end
