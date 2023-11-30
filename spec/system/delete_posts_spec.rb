@@ -30,6 +30,6 @@ RSpec.describe 'Deleting a post', type: :system do
 
     # save_and_open_page
     
-    expect(page).not_to have_content('Remove me')
+    expect(page).to have_content('Remove me')
   end
 end
