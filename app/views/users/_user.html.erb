@@ -4,6 +4,9 @@
     <div><%= user.profile.name %></div>
     <div><%= user.profile.birthday %></div>
   <% end %>
-  <div><%= button_to 'Add Friend', friend_requests_path,
-  data: { turbo_confirm: "Are you sure?" } %></div>
+  <div><%= button_to 'Add Friend', 
+                friend_requests_path(friend_request: {
+                  sender_id: current_user.id,
+                  receiver_id: user.id }),
+                data: { turbo_confirm: "Are you sure?" } %></div>
 </div>
