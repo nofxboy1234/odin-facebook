@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+one:
+  sender: one
+  receiver: three
+  notification: three

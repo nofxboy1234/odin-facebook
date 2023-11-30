@@ -1,11 +1,14 @@
 one:
-  email: fixture_user1@example.com
-  encrypted_password: 111111
+  email: user1@example.com
+  # password: 111111
+  encrypted_password: <%= User.new.send(:password_digest, '111111') %>
 
 two:
-  email: fixture_user2@example.com
-  encrypted_password: 111111
+  email: user2@example.com
+  # password: 222222
+  encrypted_password: <%= User.new.send(:password_digest, '222222') %>
 
 three:
-  email: fixture_user3@example.com
-  encrypted_password: 111111
+  email: user3@example.com
+  # password: 333333
+  encrypted_password: <%= User.new.send(:password_digest, '333333') %>

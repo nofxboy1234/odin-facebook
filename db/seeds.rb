@@ -18,10 +18,12 @@
 
 puts "\n== Seeding the database with fixtures =="
 system("bin/rails db:fixtures:load FIXTURES_PATH=spec/fixtures")
-puts 'seeding complete!'
+puts 'seeding with fixtures complete!'
 
 
 # puts "\n== Seeding the database with FactoryBot (not recommended by ThoughtBot...) =="
-# User.destroy_all
-# FactoryBot.create_list(:user, 3)
-# puts 'seeding complete!'
+# # User.destroy_all
+# FactoryBot.create(:user, email: 'user1@example.com', password: '111111')
+# FactoryBot.create(:user, email: 'user2@example.com', password: '222222')
+# FactoryBot.create(:user, email: 'user3@example.com', password: '333333')
+# puts 'seeding with FactoryBot complete!'

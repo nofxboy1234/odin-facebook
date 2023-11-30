@@ -32,6 +32,8 @@ class User < ApplicationRecord
   has_many :likes
   has_many :hearts, class_name: 'Like'
 
+  # scope :not_friends_with -> { where()}
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

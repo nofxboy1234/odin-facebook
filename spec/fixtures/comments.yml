@@ -1,7 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   content: MyText
+one:
+  content: Very cool!
+  post: three
+  user: three
 
-# two:
-#   content: MyText
+two:
+  content: Nice!
+  post: one
+  user: two
