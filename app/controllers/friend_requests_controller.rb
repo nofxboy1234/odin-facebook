@@ -22,10 +22,12 @@ class FriendRequestsController < ApplicationController
   # POST /friend_requests or /friend_requests.json
   def create
     puts "create FriendRequest"
-    debugger
-    return
-
-    @friend_request = FriendRequest.new(friend_request_params)
+    # return
+    
+    notification = Notification.create!(user_id: friend_request_params[:receiver_id])
+    # debugger
+    
+    @friend_request = FriendRequest.new(friend_request_params.merge({notification_id: notification.id}))
 
     respond_to do |format|
       if @friend_request.save
@@ -69,7 +71,7 @@ class FriendRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def friend_request_params
-      params.fetch(:friend_request, {})
+      # params.fetch(:friend_request, {})
       params.require(:friend_request)
       .permit(:sender_id, :receiver_id)
       # .permit(:sender_id, :receiver_id, :notification_id)
