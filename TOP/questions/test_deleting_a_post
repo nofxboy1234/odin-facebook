@@ -1,0 +1,48 @@
+Project/Exercise: Rails Final Project
+
+Lesson link: https://www.theodinproject.com/lessons/ruby-on-rails-rails-final-project
+
+Code: https://github.com/nofxboy1234/odin-facebook/blob/question_test_deleting_a_post/spec/system/delete_posts_spec.rb
+
+Issue/Problem:
+The show view for a Post has a button that confirms, then deletes a post.
+PostsController#destroy redirects to posts_url after deleting the post.
+
+I want to test that the deleted Post is not on the posts#index view anymore.
+
+When running an rspec/capybara system spec - `delete_posts_spec`,
+the assertion happens before being redirected to the posts#index view,
+so it is asserting content on the posts#show view instead.
+
+What I expected:
+I expected the assertion to happen after the redirect to posts#index
+
+What I've tried:
+In the test, I create a post with content = `Remove me`.
+I then visit the posts#show view and click the `Destroy this post` button.
+I put `expect(page).to have_content('Remove me')` and the test succeeded,
+but I expect it to fail.
+
+I tried disabling Turbo globally before I run the test, and this worked,
+but then I needed to add a confirm modal to the Delete button, so I turned
+Turbo back on. This didn't seem like the way to go.
+
+I then put a `sleep(0.1)` on the line before the assertion,
+and that fixes the issue, but I'm not sure if this is a good solution.
+
+I then found this: https://stackoverflow.com/questions/33533512/test-page-redirection-with-capybara-rspec?rq=3
+which mentions the `have_current_path` matcher in Capybara.
+It says `The have_current_path matcher uses Capybara's waiting/retrying behavior, 
+so it will wait for the page to change.`
+
+I put `expect(page).to have_current_path(posts_path)`
+before `expect(page).to have_content('Remove me')` and the test then fails, 
+which is what I expect.
+Doing this feels cleaner than using `sleep(0.1)`.
+
+To reproduce this issue, comment out this line:
+https://github.com/nofxboy1234/odin-facebook/blob/fbe07784b8c9050474c9f25f1cae2a7db9c44728/spec/system/delete_posts_spec.rb#L28
+and run the test with ``
+to see the test Succeed, instead of Failing as expected.
+
+Is there a better way to do this?
