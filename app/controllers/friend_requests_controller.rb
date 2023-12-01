@@ -22,7 +22,7 @@ class FriendRequestsController < ApplicationController
     puts 'create FriendRequest'
     # return
 
-    notification = Notification.create!(user_id: friend_request_params[:receiver_id])
+    notification = Notification.new(user_id: friend_request_params[:receiver_id])
     @friend_request = notification.build_friend_request(friend_request_params)
 
     respond_to do |format|
