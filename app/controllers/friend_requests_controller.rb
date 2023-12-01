@@ -24,7 +24,7 @@ class FriendRequestsController < ApplicationController
     respond_to do |format|
       if @friend_request.save
         format.html do
-          redirect_to friend_request_url(@friend_request),
+          redirect_to friend_requests_url,
                       notice: 'Friend request was successfully created.'
         end
         format.json do
