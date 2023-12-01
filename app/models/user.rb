@@ -52,12 +52,16 @@ class User < ApplicationRecord
     friend_requests_as_sender.create!(receiver: to, notification:)
   end
 
-  def friends_with?(user)
-    friends.where(id: user).count.positive? 
-  end
-
   def sent_friend_request_to?(user)
     friend_requests_as_sender.where(receiver: user).count.positive?
+  end
+
+  def received_friend_request_from?(user)
+    friend_requests_as_receiver.where(sender: user).count.positive?
+  end
+
+  def friends_with?(user)
+    friends.where(id: user).count.positive? 
   end
 
   private
