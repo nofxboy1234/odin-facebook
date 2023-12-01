@@ -1,5 +1,5 @@
 class FriendRequestsController < ApplicationController
-  before_action :set_friend_request, only: %i[ show edit update destroy ]
+  before_action :set_friend_request, only: %i[show edit update destroy]
 
   # GET /friend_requests or /friend_requests.json
   def index
@@ -7,8 +7,7 @@ class FriendRequestsController < ApplicationController
   end
 
   # GET /friend_requests/1 or /friend_requests/1.json
-  def show
-  end
+  def show; end
 
   # GET /friend_requests/new
   def new
@@ -16,22 +15,21 @@ class FriendRequestsController < ApplicationController
   end
 
   # GET /friend_requests/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /friend_requests or /friend_requests.json
   def create
-    puts "create FriendRequest"
+    puts 'create FriendRequest'
     # return
-    
+
     notification = Notification.create!(user_id: friend_request_params[:receiver_id])
-    # debugger
-    
-    @friend_request = FriendRequest.new(friend_request_params.merge({notification_id: notification.id}))
+    @friend_request = notification.build_friend_request(friend_request_params)
 
     respond_to do |format|
       if @friend_request.save
-        format.html { redirect_to friend_request_url(@friend_request), notice: "Friend request was successfully created." }
+        format.html do
+          redirect_to friend_request_url(@friend_request), notice: 'Friend request was successfully created.'
+        end
         format.json { render :show, status: :created, location: @friend_request }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +42,9 @@ class FriendRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @friend_request.update(friend_request_params)
-        format.html { redirect_to friend_request_url(@friend_request), notice: "Friend request was successfully updated." }
+        format.html do
+          redirect_to friend_request_url(@friend_request), notice: 'Friend request was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @friend_request }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,22 +58,23 @@ class FriendRequestsController < ApplicationController
     @friend_request.destroy!
 
     respond_to do |format|
-      format.html { redirect_to friend_requests_url, notice: "Friend request was successfully destroyed." }
+      format.html { redirect_to friend_requests_url, notice: 'Friend request was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_friend_request
-      @friend_request = FriendRequest.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def friend_request_params
-      # params.fetch(:friend_request, {})
-      params.require(:friend_request)
-      .permit(:sender_id, :receiver_id)
-      # .permit(:sender_id, :receiver_id, :notification_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_friend_request
+    @friend_request = FriendRequest.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def friend_request_params
+    # params.fetch(:friend_request, {})
+    params.require(:friend_request)
+          .permit(:sender_id, :receiver_id)
+    # .permit(:sender_id, :receiver_id, :notification_id)
+  end
 end
