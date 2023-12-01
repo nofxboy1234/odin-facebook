@@ -19,21 +19,24 @@ class FriendRequestsController < ApplicationController
 
   # POST /friend_requests or /friend_requests.json
   def create
-    puts 'create FriendRequest'
-    # return
-
-    notification = Notification.new(user_id: friend_request_params[:receiver_id])
     @friend_request = notification.build_friend_request(friend_request_params)
 
     respond_to do |format|
       if @friend_request.save
         format.html do
-          redirect_to friend_request_url(@friend_request), notice: 'Friend request was successfully created.'
+          redirect_to friend_request_url(@friend_request),
+                      notice: 'Friend request was successfully created.'
         end
-        format.json { render :show, status: :created, location: @friend_request }
+        format.json do
+          render :show, status: :created,
+                        location: @friend_request
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @friend_request.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @friend_request.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -43,12 +46,16 @@ class FriendRequestsController < ApplicationController
     respond_to do |format|
       if @friend_request.update(friend_request_params)
         format.html do
-          redirect_to friend_request_url(@friend_request), notice: 'Friend request was successfully updated.'
+          redirect_to friend_request_url(@friend_request),
+                      notice: 'Friend request was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @friend_request }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @friend_request.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @friend_request.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -58,7 +65,10 @@ class FriendRequestsController < ApplicationController
     @friend_request.destroy!
 
     respond_to do |format|
-      format.html { redirect_to friend_requests_url, notice: 'Friend request was successfully destroyed.' }
+      format.html do
+        redirect_to friend_requests_url,
+                    notice: 'Friend request was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -72,9 +82,11 @@ class FriendRequestsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def friend_request_params
-    # params.fetch(:friend_request, {})
     params.require(:friend_request)
           .permit(:sender_id, :receiver_id)
-    # .permit(:sender_id, :receiver_id, :notification_id)
+  end
+
+  def notification
+    Notification.new(user_id: friend_request_params[:receiver_id])
   end
 end
