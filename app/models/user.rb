@@ -32,7 +32,7 @@ class User < ApplicationRecord
   has_many :likes
   has_many :hearts, class_name: 'Like'
 
-  # scope :not_friends_with -> { where()}
+  # scope :friends_with, ->(user) { friends.where(id: user).count.positive? }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -51,9 +51,17 @@ class User < ApplicationRecord
     notification = send_notification(to:)
     friend_requests_as_sender.create!(receiver: to, notification:)
   end
-  
+
+  def friends_with?(user)
+    friends.where(id: user).count.positive? 
+  end
+
+  def sent_friend_request_to?(user)
+    friend_requests_as_sender.where(receiver: user).count.positive?
+  end
+
   private
-  
+
   def send_notification(to:)
     Notification.create!(user: to)
   end
