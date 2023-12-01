@@ -6,7 +6,7 @@ RSpec.describe 'CreateFriendRequests', type: :system do
   end
 
   before(:each) do
-    driven_by :selenium_chrome
+    # driven_by :selenium_chrome
 
     create_list(:user, 2)
     login_as(existing_user)
