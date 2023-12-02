@@ -14,7 +14,7 @@ RSpec.describe 'CreateFriendRequests', type: :system do
   end
 
   before(:each) do
-    driven_by :selenium_chrome
+    # driven_by :selenium_chrome
   end
 
   scenario 'log in as user1 with no friends' do
@@ -40,7 +40,7 @@ RSpec.describe 'CreateFriendRequests', type: :system do
     sleep(3)
   end
 
-  scenario 'log in as user1 with friends [user2]' do
+  scenario 'log in as user1 while having sent a friend request to [user2]' do
     notification = create(:notification, user: user2)
     create(:friend_request, sender: user1, receiver: user2,
                             notification:)

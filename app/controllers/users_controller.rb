@@ -3,8 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
-    @potential_friends = @users.select { |user| potential_friend?(user) }
+    @potential_friends = User.select { |user| potential_friend?(user) }
   end
 
   # GET /users/1 or /users/1.json
