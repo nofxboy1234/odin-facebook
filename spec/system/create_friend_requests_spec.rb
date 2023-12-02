@@ -20,7 +20,7 @@ RSpec.describe 'CreateFriendRequests', type: :system do
   scenario 'log in as user1 with no friends' do
     login_as(user1)
     visit users_path
-    sleep(3)
+
     expect(page).not_to have_content('user1@example.com')
     expect(page).to have_content('user2@example.com')
     expect(page).to have_content('user3@example.com')
@@ -36,7 +36,6 @@ RSpec.describe 'CreateFriendRequests', type: :system do
     expect(page).to have_content('Friend request was successfully created.')
     expect(page).to have_content("sender: #{user1.email}")
     expect(page).to have_content("receiver: #{user2.email}")
-    sleep(3)
   end
 
   scenario 'log in as user1 while having sent a friend request to [user2]' do
@@ -48,7 +47,7 @@ RSpec.describe 'CreateFriendRequests', type: :system do
 
     login_as(user1)
     visit users_path
-    sleep(3)
+
     expect(page).not_to have_content('user1@example.com')
     expect(page).not_to have_content('user2@example.com')
     expect(page).to have_content('user3@example.com')
@@ -64,6 +63,55 @@ RSpec.describe 'CreateFriendRequests', type: :system do
     expect(page).to have_content('Friend request was successfully created.')
     expect(page).to have_content("sender: #{user1.email}")
     expect(page).to have_content("receiver: #{user3.email}")
-    sleep(3)
+  end
+
+  scenario 'log in as user1 while having received a friend request from [user2]' do
+    notification = create(:notification, user: user1)
+    create(:friend_request, sender: user2, receiver: user1,
+                            notification:)
+    # debugger
+    # create(:friendship, user: user2, friend: user3)
+
+    login_as(user1)
+    visit users_path
+
+    expect(page).not_to have_content('user1@example.com')
+    expect(page).not_to have_content('user2@example.com')
+    expect(page).to have_content('user3@example.com')
+
+    accept_alert do
+      within("div#user_#{user3.id}") do
+        click_button 'Add Friend'
+      end
+    end
+
+    expect(page).to have_current_path(friend_requests_path)
+
+    expect(page).to have_content('Friend request was successfully created.')
+    expect(page).to have_content("sender: #{user1.email}")
+    expect(page).to have_content("receiver: #{user3.email}")
+  end
+
+  scenario 'log in as user1 while being friends with [user2]' do
+    create(:friendship, user: user1, friend: user2)
+
+    login_as(user1)
+    visit users_path
+
+    expect(page).not_to have_content('user1@example.com')
+    expect(page).not_to have_content('user2@example.com')
+    expect(page).to have_content('user3@example.com')
+
+    accept_alert do
+      within("div#user_#{user3.id}") do
+        click_button 'Add Friend'
+      end
+    end
+
+    expect(page).to have_current_path(friend_requests_path)
+
+    expect(page).to have_content('Friend request was successfully created.')
+    expect(page).to have_content("sender: #{user1.email}")
+    expect(page).to have_content("receiver: #{user3.email}")
   end
 end

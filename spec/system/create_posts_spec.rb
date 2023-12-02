@@ -13,11 +13,8 @@ RSpec.describe "Creating a post", type: :system do
     visit new_post_path
     fill_in 'Content', with: 'Goodbye world!'
     fill_in 'Author', with: existing_user.id
-    # sleep(5)
     click_on 'Create Post'
-    # sleep(5)
     visit posts_path
-    # sleep(5)
     expect(page).to have_content('Goodbye world!')
   end
 
