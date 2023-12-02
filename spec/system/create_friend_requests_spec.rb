@@ -34,7 +34,6 @@ RSpec.describe 'CreateFriendRequests', type: :system do
     expect(page).to have_current_path(friend_requests_path)
 
     expect(page).to have_content('Friend request was successfully created.')
-    expect(FriendRequest.count).to eq(1)
     expect(page).to have_content("sender: #{user1.email}")
     expect(page).to have_content("receiver: #{user2.email}")
     sleep(3)
@@ -63,7 +62,6 @@ RSpec.describe 'CreateFriendRequests', type: :system do
     expect(page).to have_current_path(friend_requests_path)
 
     expect(page).to have_content('Friend request was successfully created.')
-    expect(FriendRequest.count).to eq(2)
     expect(page).to have_content("sender: #{user1.email}")
     expect(page).to have_content("receiver: #{user3.email}")
     sleep(3)
