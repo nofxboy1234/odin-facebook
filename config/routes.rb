@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :friend_requests
+  resources :notifications
 end
