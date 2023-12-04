@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <% if current_user && current_user.profile %>
+      Logged in user: <%= current_user.profile.name %>
+    <% end %>
+
     <% if notice %>
       <p class='notice'><%= notice %></p>
     <% end %>
