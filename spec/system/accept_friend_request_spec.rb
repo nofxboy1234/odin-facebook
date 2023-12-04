@@ -18,7 +18,7 @@ RSpec.describe 'Accept Friend Request', type: :system do
   end
 
   context 'user1 has not received any friend request' do
-    scenario 'log in as user1' do
+    scenario 'log in as user1 and see no notifications' do
       login_as(user1)
       visit notifications_path
 
@@ -27,7 +27,7 @@ RSpec.describe 'Accept Friend Request', type: :system do
   end
 
   context 'user1 has received a friend request from [user2]' do
-    scenario 'log in as user1' do
+    scenario 'log in as user1 and accept friend request from [user2]' do
       notification = create(:notification, user: user1)
       create(:friend_request, sender: user2, receiver: user1,
                               notification:)
@@ -52,7 +52,7 @@ RSpec.describe 'Accept Friend Request', type: :system do
   end
 
   context 'user1 has received a friend request from [user2, user3]' do
-    scenario 'log in as user1' do
+    scenario 'log in as user1 and accept friend request from [user3]' do
       notification = create(:notification, user: user1)
       create(:friend_request, sender: user2, receiver: user1,
                               notification:)
