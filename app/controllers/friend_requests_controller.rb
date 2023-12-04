@@ -25,7 +25,7 @@ class FriendRequestsController < ApplicationController
       if @friend_request.save
         format.html do
           redirect_to users_path,
-                      notice: 'Friend request was successfully created.'
+                      notice: "Friend request was sent!"
         end
         format.json do
           render :show, status: :created,

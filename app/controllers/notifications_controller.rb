@@ -49,7 +49,6 @@ class NotificationsController < ApplicationController
 
   # DELETE /notifications/1 or /notifications/1.json
   def destroy
-    p "*************NotificationsController#destroy***************"
     @notification.destroy!
 
     respond_to do |format|
