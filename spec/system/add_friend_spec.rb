@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'CreateFriendRequests', type: :system do
+RSpec.describe 'Add Friend', type: :system do
   let!(:user1) do
     create(:user, email: 'user1@example.com')
   end
