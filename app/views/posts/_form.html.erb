@@ -23,6 +23,8 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field(:author_id, value: current_user.id) %>
+
   <div>
     <%= form.submit %>
   </div>
