@@ -25,7 +25,6 @@ RSpec.describe 'Deleting a post', type: :system do
     accept_alert do
       click_button 'Destroy this post'
     end
-
     
     expect(page).to have_current_path(posts_path)
 

@@ -70,8 +70,7 @@ class PostsController < ApplicationController
   end
 
   def authored_by_current_user_or_friend?(post)
-    return true if post.author.eql?(current_user) || current_user.friends_with?(post.author)
-
-    false
+    post.author.eql?(current_user) ||
+      current_user.friends_with?(post.author)
   end
 end
