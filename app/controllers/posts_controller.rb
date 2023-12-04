@@ -8,8 +8,8 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params.merge({author: current_user}))
-    
+    @post = Post.new(post_params.merge({ author: current_user }))
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_url, notice: 'Post was successfully created.' }
