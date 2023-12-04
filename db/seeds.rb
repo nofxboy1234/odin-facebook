@@ -20,6 +20,9 @@ puts "\n== Seeding the database with fixtures =="
 system("bin/rails db:fixtures:load FIXTURES_PATH=spec/fixtures")
 puts 'seeding with fixtures complete!'
 
+Post.first.update!(created_at: Date.today)
+Post.second.update!(created_at: Date.today - 1)
+Post.third.update!(created_at: Date.today - 2)
 
 # puts "\n== Seeding the database with FactoryBot (not recommended by ThoughtBot...) =="
 # # User.destroy_all
