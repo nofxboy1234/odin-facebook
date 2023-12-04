@@ -18,7 +18,7 @@ RSpec.describe 'Add Friend', type: :system do
   end
 
   context 'user1 has no friends and has not sent friend request to anyone' do
-    scenario 'log in as user1' do
+    scenario 'log in as user1 and add user2 as friend' do
       login_as(user1)
       visit users_path
   
@@ -43,7 +43,7 @@ RSpec.describe 'Add Friend', type: :system do
   end
 
   context 'user1 has no friends and has already sent friend request to user2' do
-    scenario 'log in as user1' do
+    scenario 'log in as user1 and add user3 as friend' do
       notification = create(:notification, user: user2)
       create(:friend_request, sender: user1, receiver: user2,
                               notification:)
@@ -72,7 +72,7 @@ RSpec.describe 'Add Friend', type: :system do
   end
 
   context 'user1 has no friends and has already received friend request from user2' do
-    scenario 'log in as user1' do
+    scenario 'log in as user1 and add user3 as friend' do
       notification = create(:notification, user: user1)
       create(:friend_request, sender: user2, receiver: user1,
                               notification:)
@@ -101,7 +101,7 @@ RSpec.describe 'Add Friend', type: :system do
   end
 
   context 'user1 is already friends with user2' do
-    scenario 'log in as user1' do
+    scenario 'log in as user1 and add user3 as friend' do
       create(:friendship, user: user1, friend: user2)
 
       login_as(user1)

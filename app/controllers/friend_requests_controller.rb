@@ -69,7 +69,7 @@ class FriendRequestsController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to notifications_path,
-                    notice: 'Friend request was accepted.'
+                    notice: 'Friend request was accepted!'
       end
       format.json { head :no_content }
     end
