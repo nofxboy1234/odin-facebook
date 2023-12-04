@@ -1,5 +1,5 @@
 <div id="<%= dom_id user %>">
-  <div><%= image_tag @profile_photos[user.email] %></div>
+  <div><%= link_to image_tag(@profile_photos[user.email]), user %></div>
   <div><%= user.email %></div>
   <% if user.profile %>
     <div><%= user.profile.name %></div>
@@ -10,4 +10,5 @@
                   sender_id: current_user,
                   receiver_id: user }),
                 data: { turbo_confirm: "Are you sure?" } %></div>
+  <br>
 </div>

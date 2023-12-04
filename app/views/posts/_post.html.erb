@@ -1,12 +1,19 @@
 <div id="<%= dom_id post %>">
   <p>
-    <strong>Content:</strong>
-    <%= post.content %>
-  </p>
+    <div><%= post.content %></div>
+    <div><%= post.author.email %></div>
 
-  <p>
-    <strong>Author:</strong>
-    <%= post.author_id %>
-  </p>
+    <h3>Comments</h3>
+    <% post.comments.each do |comment| %>
+      <div><%= comment.content %></div>
+      <div>by: <%= comment.user.email %></div>
+      <div><%= comment.created_at %></div>
+    <% end %>
 
+    <h3>Likes</h3>
+    <% post.likes.each do |like| %>
+      <div>Liked by: <%= like.user.email %></div>
+      <div><%= like.created_at %></div>
+    <% end %>
+  </p>
 </div>
