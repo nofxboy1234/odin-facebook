@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @potential_friends = User.select { |user| potential_friend?(user) }
+    @profile_photos = email_photo_pairs.to_h
   end
 
   # GET /users/1 or /users/1.json
@@ -74,5 +75,17 @@ class UsersController < ApplicationController
                        user.eql?(current_user)
 
     false
+  end
+
+  def profile_photo(user)
+    email_address = user.email.downcase
+    hash = Digest::MD5.hexdigest(email_address)
+    "https://www.gravatar.com/avatar/#{hash}"
+  end
+
+  def email_photo_pairs
+    @potential_friends.map do |user|
+      [user.email, profile_photo(user)]
+    end
   end
 end
