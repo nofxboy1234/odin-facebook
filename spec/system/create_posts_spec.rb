@@ -14,7 +14,8 @@ RSpec.describe "Creating a post", type: :system do
     fill_in 'Content', with: 'Goodbye world!'
     fill_in 'Author', with: existing_user.id
     click_on 'Create Post'
-    visit posts_path
+
+    expect(page).to have_current_path(posts_path)
     expect(page).to have_content('Goodbye world!')
   end
 
@@ -23,6 +24,8 @@ RSpec.describe "Creating a post", type: :system do
     fill_in 'Content', with: ''
     fill_in 'Author', with: ''
     click_on 'Create Post'
+    
+    expect(page).to have_current_path(new_post_path)
     expect(page).to have_content("Author can't be blank")
   end
 end

@@ -21,8 +21,8 @@ RSpec.describe "Updating a post", type: :system do
     visit edit_post_path(post)
     fill_in 'Content', with: 'Test Post'
     click_on 'Update Post'
-    visit posts_path
-    # debugger
+    
+    expect(page).to have_current_path(posts_path)
     expect(page).to have_content('Test Post')
   end
 end
