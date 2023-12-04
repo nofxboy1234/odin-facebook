@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
 
   # GET /notifications or /notifications.json
   def index
-    @notifications = Notification.all
+    @notifications = current_user.notifications
   end
 
   # GET /notifications/1 or /notifications/1.json
@@ -49,6 +49,7 @@ class NotificationsController < ApplicationController
 
   # DELETE /notifications/1 or /notifications/1.json
   def destroy
+    p "*************NotificationsController#destroy***************"
     @notification.destroy!
 
     respond_to do |format|

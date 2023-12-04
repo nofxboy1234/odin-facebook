@@ -17,25 +17,26 @@ RSpec.describe 'CreateFriendRequests', type: :system do
     # driven_by :selenium_chrome
   end
 
-  scenario 'log in as user1 with no friends' do
-    login_as(user1)
-    visit users_path
-
-    expect(page).not_to have_content('user1@example.com')
-    expect(page).to have_content('user2@example.com')
-    expect(page).to have_content('user3@example.com')
-
-    accept_alert do
-      within("div#user_#{user2.id}") do
-        click_button 'Add Friend'
+  context 'user1 has sent friend request to user2' do
+    scenario 'log in as user1 with no friends' do
+      login_as(user1)
+      visit users_path
+  
+      expect(page).not_to have_content('user1@example.com')
+      expect(page).to have_content('user2@example.com')
+      expect(page).to have_content('user3@example.com')
+  
+      accept_alert do
+        within("div#user_#{user2.id}") do
+          click_button 'Add Friend'
+        end
       end
+  
+      expect(page).to have_current_path(users_path)
+  
+      expect(page).to have_content('Friend request was successfully created.')
+      expect(page).not_to have_content('user2@example.com')
     end
-
-    expect(page).to have_current_path(friend_requests_path)
-
-    expect(page).to have_content('Friend request was successfully created.')
-    expect(page).to have_content("sender: #{user1.email}")
-    expect(page).to have_content("receiver: #{user2.email}")
   end
 
   scenario 'log in as user1 while having sent a friend request to [user2]' do

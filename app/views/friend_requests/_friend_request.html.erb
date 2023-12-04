@@ -1,4 +1,7 @@
 <div id="<%= dom_id friend_request %>">
-  <div>sender: <%= friend_request.sender.email %></div>
-  <div>receiver: <%= friend_request.receiver.email %></div>
+  <div>friend request from: <%= friend_request.sender.email %></div>
+  <%= button_to 'Accept', friend_request, 
+                        method: :delete,
+                        data: { turbo_confirm: "Are you sure?" } %>
+
 </div>

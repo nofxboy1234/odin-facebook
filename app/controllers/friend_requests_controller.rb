@@ -3,7 +3,7 @@ class FriendRequestsController < ApplicationController
 
   # GET /friend_requests or /friend_requests.json
   def index
-    @friend_requests = FriendRequest.all
+    @friend_requests = current_user.friend_requests_as_receiver
   end
 
   # GET /friend_requests/1 or /friend_requests/1.json
@@ -24,7 +24,7 @@ class FriendRequestsController < ApplicationController
     respond_to do |format|
       if @friend_request.save
         format.html do
-          redirect_to friend_requests_url,
+          redirect_to users_path,
                       notice: 'Friend request was successfully created.'
         end
         format.json do
@@ -62,12 +62,14 @@ class FriendRequestsController < ApplicationController
 
   # DELETE /friend_requests/1 or /friend_requests/1.json
   def destroy
-    @friend_request.destroy!
+    @friend_request.accept
+    # @friend_request.destroy!
+    @friend_request.notification.destroy!
 
     respond_to do |format|
       format.html do
-        redirect_to friend_requests_url,
-                    notice: 'Friend request was successfully destroyed.'
+        redirect_to notifications_path,
+                    notice: 'Friend request was accepted.'
       end
       format.json { head :no_content }
     end
