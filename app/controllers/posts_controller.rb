@@ -23,7 +23,9 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.order(created_at: :desc).select do |post|
+      authored_by_current_user_or_friend?(post)
+    end
   end
 
   # GET /posts/1 or /posts/1.json
@@ -65,5 +67,11 @@ class PostsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:content, :author_id)
+  end
+
+  def authored_by_current_user_or_friend?(post)
+    return true if post.author.eql?(current_user) || current_user.friends_with?(post.author)
+
+    false
   end
 end
