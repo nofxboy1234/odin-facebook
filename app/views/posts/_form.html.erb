@@ -16,10 +16,12 @@
     <%= form.text_area :content %>
   </div>
 
-  <div>
-    <%= form.label :author_id, style: "display: block" %>
-    <%= form.text_field :author_id %>
-  </div>
+  <% if false %>
+    <div>
+      <%= form.label :author_id, style: "display: block" %>
+      <%= form.text_field :author_id %>
+    </div>
+  <% end %>
 
   <div>
     <%= form.submit %>
