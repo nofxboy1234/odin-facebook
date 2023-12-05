@@ -4,11 +4,15 @@
     <div><%= post.author.email %></div>
     <div><strong><%= post.created_at %></strong></div>
 
+    <div><%= link_to 'Add Comment', 
+              new_comment_path( comment: { post_id: post.id } ) %>
+    </div>
     <h3>Comments</h3>
     <% post.comments.each do |comment| %>
       <div><%= comment.content %></div>
       <div>by: <%= comment.user.email %></div>
       <div><%= comment.created_at %></div>
+      <br>
     <% end %>
 
     <h3>Likes</h3>
