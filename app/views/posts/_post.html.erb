@@ -5,7 +5,7 @@
     <div><strong><%= post.created_at %></strong></div>
 
     <div><%= link_to 'Add Comment', 
-              new_comment_path( comment: { post_id: post.id } ) %>
+              new_comment_path(comment: { post_id: post.id }) %>
     </div>
     <h3>Comments</h3>
     <% post.comments.each do |comment| %>
@@ -15,10 +15,15 @@
       <br>
     <% end %>
 
+    <div><%= button_to 'Like', 
+              likes_path(like: { post_id: post, user_id: current_user }) %>
+    </div>
+
     <h3>Likes</h3>
     <% post.likes.each do |like| %>
       <div>Liked by: <%= like.user.email %></div>
       <div><%= like.created_at %></div>
+      <br>
     <% end %>
   </p>
 </div>
