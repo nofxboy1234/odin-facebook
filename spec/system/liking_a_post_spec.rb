@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Commenting on a post', type: :system do
+RSpec.describe "Commenting on a post", type: :system do
   let!(:user1) do
     create(:user)
   end
@@ -21,20 +21,17 @@ RSpec.describe 'Commenting on a post', type: :system do
   end
 
   context 'user1 is friends with user2' do
-    scenario 'user1 comments on a post made by user2' do
+    scenario 'user1 likes a post by user2' do
       visit posts_path
       within("div#post_#{post.id}") do
-        click_link 'Add Comment'
+        click_button 'Like'
       end
-
-      page.find('h1', text: 'New comment')
-
-      fill_in 'Content', with: 'So cool!'
-      click_button 'Create Comment'
-
+  
+      page.find('h1', text: 'Posts')
+      
       expect(page).to have_current_path(posts_path)
-      expect(page).to have_content('Comment was successfully created.')
-      expect(page).to have_content('So cool!')
+      expect(page).to have_content("Like was successfully created.")
+      expect(page).to have_content("Liked by: #{user1.email}")
     end
   end
 end
