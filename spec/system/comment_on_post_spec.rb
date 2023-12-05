@@ -1,20 +1,38 @@
 require 'rails_helper'
 
-RSpec.describe "Creating a post", type: :system do
-  # let!(:existing_user) do
-  #   create(:user)
-  # end
+RSpec.describe "Commenting on a post", type: :system do
+  let!(:user1) do
+    create(:user)
+  end
 
-  # before(:each) do
-  #   login_as(existing_user)
-  # end
+  let!(:user2) do
+    create(:user)
+  end
 
-  # scenario 'valid inputs' do
-  #   visit new_post_path
-  #   fill_in 'Content', with: 'Goodbye world!'
-  #   click_on 'Create Post'
+  let!(:post) do
+    create(:post, author: user2)
+  end
 
-  #   expect(page).to have_current_path(posts_path)
-  #   expect(page).to have_content('Goodbye world!')
-  # end
+  before(:each) do
+    # driven_by :selenium_chrome
+
+    create(:friendship, user: user1, friend: user2)
+    login_as(user1)
+  end
+
+  scenario 'valid inputs' do
+    visit posts_path
+    within("div#post_#{post.id}") do
+      click_link 'Add Comment'
+    end
+
+    page.find('h1', text: 'New comment')
+    
+    fill_in 'Content', with: 'So cool!'
+    click_button 'Create Comment'
+
+    expect(page).to have_current_path(posts_path)
+    expect(page).to have_content("Comment was successfully created.")
+    expect(page).to have_content('So cool!')
+  end
 end
