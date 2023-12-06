@@ -1,7 +1,15 @@
 <div id="<%= dom_id friend_request %>">
-  <div>friend request from: <%= friend_request.sender.email %></div>
-  <%= button_to 'Accept', friend_request, 
-                        method: :delete,
-                        data: { turbo_confirm: "Are you sure?" } %>
 
+  <% if current_user.friend_requests_as_sender.include?(friend_request) %>
+    <div><%= link_to image_tag(friend_request.receiver.profile_photo), friend_request.receiver %></div>
+    <div><%= friend_request.created_at %></div>
+    <div>friend request to: <%= friend_request.receiver.email %></div>
+  <% else %>
+    <div><%= link_to image_tag(friend_request.sender.profile_photo), friend_request.sender %></div>
+    <div><%= friend_request.created_at %></div>
+    <div>friend request from: <%= friend_request.sender.email %></div>
+    <%= button_to 'Accept', friend_request, 
+                          method: :delete,
+                          data: { turbo_confirm: "Are you sure?" } %>
+  <% end %>
 </div>

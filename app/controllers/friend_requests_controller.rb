@@ -3,7 +3,7 @@ class FriendRequestsController < ApplicationController
 
   # GET /friend_requests or /friend_requests.json
   def index
-    @friend_requests = current_user.friend_requests_as_receiver
+    @friend_requests = current_user.friend_requests_as_sender
   end
 
   # GET /friend_requests/1 or /friend_requests/1.json
