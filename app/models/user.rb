@@ -65,6 +65,12 @@ class User < ApplicationRecord
     friends.where(id: user).count.positive? 
   end
 
+  def profile_photo
+    email_address = email.downcase
+    hash = Digest::MD5.hexdigest(email_address)
+    "https://www.gravatar.com/avatar/#{hash}"
+  end
+
   private
 
   def send_notification(to:)

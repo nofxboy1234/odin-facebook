@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @profile_photo = profile_photo(@user)
+    @profile_photo = @user.profile_photo
   end
 
   # GET /users/new
@@ -79,15 +79,9 @@ class UsersController < ApplicationController
     false
   end
 
-  def profile_photo(user)
-    email_address = user.email.downcase
-    hash = Digest::MD5.hexdigest(email_address)
-    "https://www.gravatar.com/avatar/#{hash}"
-  end
-
   def email_photo_pairs
     @potential_friends.map do |user|
-      [user.email, profile_photo(user)]
+      [user.email, user.profile_photo]
     end
   end
 end
