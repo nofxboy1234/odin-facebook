@@ -11,9 +11,7 @@
   </head>
 
   <body>
-    <% if current_user && current_user.profile %>
-      Logged in user: <%= current_user.profile.name %>
-    <% end %>
+    <%= render 'application/nav_bar' %>
 
     <% if notice %>
       <p class='notice'><%= notice %></p>
