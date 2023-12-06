@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   resources :comments
   resources :likes
   resources :profiles
+  resources :friends
 end

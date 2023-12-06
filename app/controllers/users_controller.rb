@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @potential_friends = User.select { |user| potential_friend?(user) }
+    @users = User.select { |user| potential_friend?(user) }
     @profile_photos = email_photo_pairs.to_h
   end
 
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def email_photo_pairs
-    @potential_friends.map do |user|
+    @users.map do |user|
       [user.email, user.profile_photo]
     end
   end

@@ -1,9 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
-
 <div id="users">
-  <% @potential_friends.each do |user| %>
+  <% @users.each do |user| %>
     <%= render user %>
   <% end %>
 </div>

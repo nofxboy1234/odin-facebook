@@ -2,6 +2,7 @@
   <p>
     <div><%= post.content %></div>
     <div><%= post.author.email %></div>
+    <div><%= post.author.profile.name %></div>
     <div><strong><%= post.created_at %></strong></div>
 
     <div><%= link_to 'Add Comment', 
