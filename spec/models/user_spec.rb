@@ -227,6 +227,7 @@ RSpec.describe User, type: :model do
   describe '#profile', profile: true do
     context 'when a user has created a profile' do
       let!(:profile) do
+        user.profile.destroy!
         user.create_profile!
       end
 
