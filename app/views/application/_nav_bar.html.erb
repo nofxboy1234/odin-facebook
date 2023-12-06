@@ -1,3 +1,8 @@
 <% if current_user && current_user.profile %>
-      Logged in user: <%= current_user.profile.name %>
+      <%= link_to 'Posts' %> |
+      <%= link_to 'Friends' %> |
+      <%= link_to 'Users' %> |
+      <%= link_to 'Notifications' %> |
+      <%= link_to current_user.profile.name %> |
+      <%= link_to 'Log Out' %> |
 <% end %>
