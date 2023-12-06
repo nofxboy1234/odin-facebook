@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   resources :notifications
   resources :comments
   resources :likes
+  resources :profiles
 end
