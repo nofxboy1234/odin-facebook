@@ -1,8 +1,8 @@
 <% if current_user %>
-      <%= link_to 'Posts' %> |
+      <%= link_to 'Posts', posts_path %> |
       <%= link_to 'Friends' %> |
-      <%= link_to 'Users' %> |
-      <%= link_to 'Notifications' %> |
+      <%= link_to 'Users', users_path %> |
+      <%= link_to 'Notifications', notifications_path %> |
       <%= link_to current_user.profile.name %> |
       <%= link_to 'Logout', 
                     destroy_user_session_path, 
