@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  # after_action :create_new_profile, only: %i[create]
 
   # GET /users or /users.json
   def index

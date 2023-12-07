@@ -44,8 +44,8 @@ class User < ApplicationRecord
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.build_profile(name: user.email.split('@').first)
 
+      user.create_new_profile
       NotificationsMailer.sign_up.deliver_later!
     end
   end
@@ -64,13 +64,17 @@ class User < ApplicationRecord
   end
 
   def friends_with?(user)
-    friends.where(id: user).count.positive? 
+    friends.where(id: user).count.positive?
   end
 
   def profile_photo
     email_address = email.downcase
     hash = Digest::MD5.hexdigest(email_address)
     "https://www.gravatar.com/avatar/#{hash}"
+  end
+
+  def create_new_profile
+    build_profile(name: email.split('@').first)
   end
 
   private
