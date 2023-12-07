@@ -45,6 +45,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.build_profile(name: user.email.split('@').first)
+
+      NotificationsMailer.sign_up.deliver_later!
     end
   end
 
