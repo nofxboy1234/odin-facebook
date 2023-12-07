@@ -45,7 +45,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
 
-      user.create_new_profile
+      user.build_new_profile
       NotificationsMailer.sign_up.deliver_later!
     end
   end
@@ -73,8 +73,12 @@ class User < ApplicationRecord
     "https://www.gravatar.com/avatar/#{hash}"
   end
 
-  def create_new_profile
+  def build_new_profile
     build_profile(name: email.split('@').first)
+  end
+
+  def create_new_profile
+    create_profile!(name: email.split('@').first)
   end
 
   private
