@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |user|
       user.create_new_profile
-      NotificationsMailer.sign_up.deliver_later!
+      NotificationsMailer.with(user:).sign_up.deliver_later!
     end
   end
 

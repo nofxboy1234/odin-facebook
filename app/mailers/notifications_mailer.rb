@@ -7,7 +7,8 @@ class NotificationsMailer < ApplicationMailer
   #
   def sign_up
     @greeting = "Hi"
-
-    mail to: "to@example.org"
+    @user = params[:user]
+    
+    mail to: @user.email
   end
 end
