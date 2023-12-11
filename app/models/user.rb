@@ -32,8 +32,6 @@ class User < ApplicationRecord
   has_many :likes
   has_many :hearts, class_name: 'Like'
 
-  # scope :friends_with, ->(user) { friends.where(id: user).count.positive? }
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
