@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :friend_requests, only: %i[index create destroy]
   resources :notifications, only: %i[index]
   resources :comments, only: %i[new create]
-  resources :likes
+  resources :likes, only: %i[create]
   resources :profiles
   resources :friends
 end
