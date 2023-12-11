@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   resources :users, only: %i[index show]
-  resources :posts
+  resources :posts, only: %i[new create index]
   resources :friend_requests
   resources :notifications
   resources :comments
