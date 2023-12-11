@@ -1,21 +1,10 @@
 class FriendRequestsController < ApplicationController
-  before_action :set_friend_request, only: %i[show edit update destroy]
+  before_action :set_friend_request, only: %i[destroy]
 
   # GET /friend_requests or /friend_requests.json
   def index
     @friend_requests = current_user.friend_requests_as_sender
   end
-
-  # GET /friend_requests/1 or /friend_requests/1.json
-  def show; end
-
-  # GET /friend_requests/new
-  def new
-    @friend_request = FriendRequest.new
-  end
-
-  # GET /friend_requests/1/edit
-  def edit; end
 
   # POST /friend_requests or /friend_requests.json
   def create
@@ -33,25 +22,6 @@ class FriendRequestsController < ApplicationController
         end
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json do
-          render json: @friend_request.errors,
-                 status: :unprocessable_entity
-        end
-      end
-    end
-  end
-
-  # PATCH/PUT /friend_requests/1 or /friend_requests/1.json
-  def update
-    respond_to do |format|
-      if @friend_request.update(friend_request_params)
-        format.html do
-          redirect_to friend_request_url(@friend_request),
-                      notice: 'Friend request was successfully updated.'
-        end
-        format.json { render :show, status: :ok, location: @friend_request }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json do
           render json: @friend_request.errors,
                  status: :unprocessable_entity
