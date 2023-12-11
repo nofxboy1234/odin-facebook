@@ -24,5 +24,5 @@ Rails.application.routes.draw do
   resources :comments, only: %i[new create]
   resources :likes, only: %i[create]
   resources :profiles, only: %i[show edit update]
-  resources :friends
+  resources :friends, only: %i[index]
 end
