@@ -23,6 +23,6 @@ Rails.application.routes.draw do
   resources :notifications, only: %i[index]
   resources :comments, only: %i[new create]
   resources :likes, only: %i[create]
-  resources :profiles
+  resources :profiles, only: %i[show edit update]
   resources :friends
 end
